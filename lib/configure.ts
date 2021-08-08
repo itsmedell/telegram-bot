@@ -14,7 +14,7 @@ prompt(configure)
 .then(async (data: configFormat) => {
     switch(data.prefix) {
         case "multi":
-            console.log(color("[System]", "yellow"), color("Gunakan tanda [,] untuk memisahkan antara prefix", "white"))
+            console.log(color("[System]", "yellow"), color("Gunakan tanda [,] untuk memisahkan antar prefix", "white"))
             await prompt({
                 type: "input",
                 name: "prefix",
