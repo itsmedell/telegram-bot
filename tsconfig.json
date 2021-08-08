@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "target": "ES2018",
+        "module": "CommonJS",
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "declaration": true,
+        "outDir": "build"
+    },
+    "exclude": ["node_modules"]
+}
