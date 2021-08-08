@@ -1,10 +1,15 @@
-export enum LocationFiles {
+import {
+    color
+} from './utility'
+
+export enum locFiles {
     config = './data/bot/config.json'
 }
 
 export interface configFormat {
     username: string,
-    token: string
+    token: string,
+    prefix: string[]|string
 }
 
 export const configure = [
@@ -17,6 +22,15 @@ export const configure = [
         type: "password",
         name: "token",
         message: "Masukan token"
+    },
+    {
+        type: "select",
+        name: "prefix",
+        message: "Masukan tipe prefix",
+        choices: [
+            "single",
+            "multi"
+        ]
     }
 ]
 

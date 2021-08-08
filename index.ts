@@ -1,24 +1,50 @@
 import { 
     prompt
-} from 'enquirer';
+} from 'enquirer'
 import * as constant from './lib/constant'
 import * as bot from './bot'
 import {
-    checkFormatToken
+    checkFormatToken, 
+    color
 } from './lib/utility'
 import fs from 'fs'
 
 // Variable
-const { LocationFiles, configure, configureFix } = constant
+const { locFiles, configure, configureFix } = constant
 
-if (fs.existsSync(LocationFiles.config)) {
+// StartUP
+if (fs.existsSync(locFiles.config)) {
     bot.starts()
 } else {
+    // First configuration
     prompt(configure)
-    .then((data: constant.configFormat) => {
+    .then(async (data: constant.configFormat) => {
+        switch(data.prefix) {
+            case "multi":
+                console.log(color("[System]", "yellow"), color("Gunakan tanda [,] untuk memisahkan antara prefix", "white"))
+                await prompt({
+                    type: "input",
+                    name: "prefix",
+                    message: "Masukan prefix"
+                }).then((res: any) => {
+                    data.prefix = res.prefix.split(",")
+                })
+            break
+            case "single":
+                await prompt({
+                    type: "input",
+                    name: "prefix",
+                    message: "Masukan prefix"
+                }).then((res: any) => {
+                    data.prefix = res.prefix
+                })
+            break
+            default:
+                return
+        }
         if (!checkFormatToken(data.token)) {
             let retry = false
-            console.log("Format token yang anda masukan salah!")
+            console.log(color("[System]", "yellow"), color("Format token yang anda masukan salah!", "red"))
             prompt(configureFix)
             .then((result: any) => {
                 switch(result.confirm) {
@@ -38,17 +64,17 @@ if (fs.existsSync(LocationFiles.config)) {
                         message: "Masukan token"
                     }).then((response: any) => {
                         data.token = response.token
-                        fs.writeFileSync(LocationFiles.config, JSON.stringify(data, null, 2))
-                        console.log("Silahkan jalankan ulang bot ini")
+                        fs.writeFileSync(locFiles.config, JSON.stringify(data, null, 2))
+                        console.log(color("[System]", "yellow"), color("Silahkan jalankan ulang bot ini", "green"))
                     })
                 } else {
-                    fs.writeFileSync(LocationFiles.config, JSON.stringify(data, null, 2))
-                    console.log("Silahkan jalankan ulang bot ini")
+                    fs.writeFileSync(locFiles.config, JSON.stringify(data, null, 2))
+                    console.log(color("[System]", "yellow"), color("Silahkan jalankan ulang bot ini", "green"))
                 }
             })
         } else {
-            fs.writeFileSync(LocationFiles.config, JSON.stringify(data, null, 2))
-            console.log("Silahkan jalankan ulang bot ini")
+            fs.writeFileSync(locFiles.config, JSON.stringify(data, null, 2))
+            console.log(color("[System]", "yellow"), color("Silahkan jalankan ulang bot ini", "green"))
         }
     })
 }
