@@ -2,7 +2,6 @@ import {
     Telegraf
 } from 'telegraf'
 import { prompt } from 'enquirer'
-import * as cfonts from 'cfonts'
 import fs from 'fs'
 import * as constant from './lib/constant'
 import * as handler from './handler/exports'
