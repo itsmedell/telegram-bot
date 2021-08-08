@@ -1,5 +1,4 @@
 # <p align="center">Telegram Bot</p>
- Script telegram bot sederhana
 
 ## 📑 Requirements
 - [Git](https://git-scm.com/downloads)
