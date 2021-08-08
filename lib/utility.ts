@@ -23,7 +23,7 @@ export function color(text: string, color?: string) {
 
 export function countAllDirFiles(locationDir: string) {
     if (fs.existsSync(locationDir)) {
-        const files = fs.readdirSync(locationDir).filter(file => file.endsWith('.ts'))
+        const files = fs.readdirSync(locationDir).filter(file => file.endsWith('.ts') || file.endsWith('.json'))
         return files.length
     } else {
         return 0
@@ -41,8 +41,4 @@ export function isCmd(message: string, prefix: string[]|string) {
     } else {
         match = message.startsWith(prefix)
     }
-}
-
-export function countPackage(data: object) {
-    
 }

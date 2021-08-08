@@ -1,15 +1,44 @@
-import {
-    color
-} from './utility'
-
 export enum locFiles {
-    config = './data/bot/config.json'
+    config = './data/bot/config.json',
+    data = './data/',
+    plugin = './plugin/',
+    lib = './lib/',
+    func = './function/'
 }
 
 export interface configFormat {
     username: string,
     token: string,
     prefix: string[]|string
+}
+
+interface photoMessage {
+    file_id: string,
+    file_unique_id: string,
+    file_size: number,
+    width: number,
+    height: number
+}
+
+export interface ContextMessage {
+    message_id: number,
+    from: {
+        id: number,
+        is_bot: boolean,
+        first_name: string,
+        username: string,
+        language_code: string
+    },
+    chat: {
+        id: number,
+        first_name: string,
+        username: string,
+        language_code: string,
+        type: string
+    },
+    date: number,
+    text?: string,
+    photo?: Array<photoMessage>
 }
 
 export const configure = [

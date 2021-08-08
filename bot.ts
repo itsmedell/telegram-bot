@@ -5,8 +5,7 @@ import { prompt } from 'enquirer'
 import fs from 'fs'
 import * as constant from './lib/constant'
 import * as handler from './handler/exports'
-import { color } from './lib/utility'
-import Table from 'cli-table'
+import { color, countAllDirFiles } from './lib/utility'
 import * as pkg from './package.json'
 
 const { locFiles } = constant
@@ -18,68 +17,61 @@ export async function starts() {
 
     // Send error if token is invalid
     bot.launch()
-        .catch((errorData: any) => {
-            switch (errorData.response.description.toLowerCase()) {
-                case "bot token is required":
-                    console.log("Token Bot diperlukan!")
-                    prompt({
-                        type: "password",
-                        name: "token",
-                        message: "Masukan token"
-                    }).then((data: any) => {
-                        config.token = data.token
-                        fs.writeFileSync(locFiles.config, JSON.stringify(config, null, 2))
-                        console.log("Silahkan jalankan ulang bot ini")
-                    })
-                    break
-                case "not found":
-                    console.log("Token bot yang anda masukan tidak ditemukan!")
-                    prompt({
-                        type: "password",
-                        name: "token",
-                        message: "Masukan token"
-                    }).then((data: any) => {
-                        config.token = data.token
-                        fs.writeFileSync(locFiles.config, JSON.stringify(config, null, 2))
-                        console.log("Silahkan jalankan ulang bot ini")
-                    })
-                    break
-                case "unauthorized":
-                    console.log("Token yang anda masukan invalid!")
-                    prompt({
-                        type: "password",
-                        name: "token",
-                        message: "Masukan token"
-                    }).then((data: any) => {
-                        config.token = data.token
-                        fs.writeFileSync(locFiles.config, JSON.stringify(config, null, 2))
-                        console.log("Silahkan jalankan ulang bot ini")
-                    })
-                    break
-                default:
-                    return
-            }
-        })
+    .catch((errorData: any) => {
+        switch (errorData.response.description.toLowerCase()) {
+            case "bot token is required":
+                console.log("Token Bot diperlukan!")
+                prompt({
+                    type: "password",
+                    name: "token",
+                    message: "Masukan token"
+                }).then((data: any) => {
+                    config.token = data.token
+                    fs.writeFileSync(locFiles.config, JSON.stringify(config, null, 2))
+                    console.log("Silahkan jalankan ulang bot ini")
+                })
+                break
+            case "not found":
+                console.log("Token bot yang anda masukan tidak ditemukan!")
+                prompt({
+                    type: "password",
+                    name: "token",
+                    message: "Masukan token"
+                }).then((data: any) => {
+                    config.token = data.token
+                    fs.writeFileSync(locFiles.config, JSON.stringify(config, null, 2))
+                    console.log("Silahkan jalankan ulang bot ini")
+                })
+                break
+            case "unauthorized":
+                console.log("Token yang anda masukan invalid!")
+                prompt({
+                    type: "password",
+                    name: "token",
+                    message: "Masukan token"
+                }).then((data: any) => {
+                    config.token = data.token
+                    fs.writeFileSync(locFiles.config, JSON.stringify(config, null, 2))
+                    console.log("Silahkan jalankan ulang bot ini")
+                })
+                break
+            default:
+                return
+        }
+    })
 
     // Log Info Script
-    const totalPackage = []
-    Object.keys(pkg.dependencies).forEach((i) => {
-        totalPackage.push(i)
-    })
-    const table = new Table()
-    table.push(
-        ["Name", pkg.name],
-        ["Author", pkg.author],
-        ["Version", pkg.version],
-        ["Visit Repo", color(pkg.repository, "yellow")],
-        ["Report Bug", color(pkg.bugs.url, "cyan")],
-        ["Total Package", totalPackage.length]
-    )
-    console.log(table.toString())
+    console.log(color('=> Successfully loaded!', 'yellow'), color('Plugin:', 'yellow'), color(countAllDirFiles(locFiles.plugin).toString(), 'green'),
+    color('Library:', 'yellow'), color(countAllDirFiles(locFiles.lib).toString(), 'green'), color('Function:', 'yellow'), color(countAllDirFiles(locFiles.func).toString(), 'green'),
+    color('Database:', 'yellow'), color(countAllDirFiles(locFiles.data).toString(), 'green'))
+    console.log(color('=> Bot Version:', 'yellow'), color(pkg.version))
+    console.log(color('=> Bug? Error? Saran?:', 'yellow'), color(pkg.bugs.url, 'green'))
+    console.log(color('[TeleBot]', 'cyan'), color('Sekarang botmu sudah menyala', 'yellow'))
+    console.log(color('[Author]', 'cyan'), color("Semoga kalian suka dengan script ini :)", 'yellow'))
 
     // Handler
     handler.EventsHandler(bot)
     bot.on('message', (context) => {
-        handler.MessageHandler(context)
+        handler.MessageHandler(context, context.message)
     })
 }
