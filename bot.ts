@@ -66,7 +66,7 @@ export async function starts() {
     color('Database:', 'yellow'), color(countAllDirFiles(locFiles.data).toString(), 'green'))
     console.log(color('=> Bot Version:', 'yellow'), color(pkg.version))
     console.log(color('=> Bug? Error? Saran?:', 'yellow'), color(pkg.bugs.url, 'green'))
-    console.log(color('[TeleBot]', 'cyan'), color('Sekarang botmu sudah menyala', 'yellow'))
+    console.log(color('[TeleBot]', 'cyan'), color('Sekarang bot sudah menyala!', 'yellow'))
     console.log(color('[Author]', 'cyan'), color("Semoga kalian suka dengan script ini :)", 'yellow'))
 
     // Handler

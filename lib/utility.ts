@@ -30,15 +30,15 @@ export function countAllDirFiles(locationDir: string) {
     }
 }
 
-export function isCmd(message: string, prefix: string[]|string) {
+export async function isCmd(message: string, prefix: string[]|string) {
     let match = false
-    if (typeof prefix === 'object') {
+    if (typeof prefix === 'string') {
+        match = await message.startsWith(prefix)
+    } else {
         Object.keys(prefix).forEach((i) => {
             if (message.startsWith(prefix[i])) {
                 match = true
             }
         })
-    } else {
-        match = message.startsWith(prefix)
     }
 }
