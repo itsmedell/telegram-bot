@@ -14,7 +14,7 @@
   "scripts": {
     "start": "ts-node index.ts",
     "build": "tsc",
-    "configure": "ts-node configure.ts"
+    "configure": "ts-node lib/configure.ts"
   },
   "dependencies": {
     "@types/node": "^16.4.13",
