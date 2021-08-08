@@ -18,7 +18,7 @@ export function checkFormatToken(token: string) {
  * @returns Text with color 
  */
 export function color(text: string, color?: string) {
-    return color ? chalk.keyword(color)(text) : chalk.white(text)
+    return color ? chalk.keyword(color)(text) : chalk.green(text)
 }
 
 export function countAllDirFiles(locationDir: string) {
