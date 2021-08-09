@@ -1,5 +1,7 @@
 import chalk from "chalk"
 import fs from 'fs'
+import moment from "moment"
+import { ContextMessage } from "./constant"
 
 /**
  * Check if token format is valid
@@ -30,15 +32,34 @@ export function countAllDirFiles(locationDir: string) {
     }
 }
 
-export async function isCmd(message: string, prefix: string[]|string) {
-    let match = false
-    if (typeof prefix === 'string') {
-        match = await message.startsWith(prefix)
-    } else {
-        Object.keys(prefix).forEach((i) => {
-            if (message.startsWith(prefix[i])) {
-                match = true
-            }
-        })
+export function isCmd(message: string, prefix: string[]|string) {
+    let match = true
+    if (!Array.isArray(prefix)) {
+        prefix = [prefix]
     }
+    Object.keys(prefix).forEach((i) => {
+        if (message.startsWith(prefix[i])) {
+            match = false
+        }
+    })
+    return match
+}
+
+export function hasNewMessage(message: ContextMessage[]) {
+    if (!Array.isArray(message)) {
+        message = [message]
+    }
+    let match: boolean
+    const listDate = []
+    Object.keys(message).forEach((i) => {
+        listDate.push(message[i].date)
+    })
+    Object.keys(listDate).forEach((i) => {
+        if (moment(listDate[i] * 1000).format('DD/MM/YY HH:mm:ss') === moment().format("DD/MM/YY HH:mm:ss")) {
+            match = true
+        } else {
+            match = false
+        }
+    })
+    return match
 }

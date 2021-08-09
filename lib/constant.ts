@@ -1,3 +1,5 @@
+import { Context } from "telegraf"
+
 export const configure = [
     {
         type: "input",
@@ -36,6 +38,11 @@ export enum locFiles {
     plugin = './plugin/',
     lib = './lib/',
     func = './function/'
+}
+
+export enum typeChat {
+    private = 'private',
+    group = 'group'
 }
 
 export interface configFormat {
@@ -199,4 +206,11 @@ export interface ContextMessage {
     document?: documentMessage,
     reply_to_message?: replyMessage,
     poll?: pollMessage
+}
+
+export interface pluginFormat {
+    name: string,
+    aliases: string[],
+    description: string,
+    execute(context: Context, message: ContextMessage): void
 }
