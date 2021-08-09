@@ -42,6 +42,11 @@ export async function MessageHandler(context: Context, rawMessage: any) {
                 })
                 console.log(isCmd(body, config.prefix))
             break
+            case "ping":
+                context.reply("Pong!", {
+                    reply_to_message_id: message.message_id
+                })
+            break
             default:
                 if (isCmd(body, config.prefix)) {
                     context.reply("Command not found!", {
