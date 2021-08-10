@@ -48,7 +48,7 @@ export enum typeChat {
 export interface configFormat {
     username: string,
     token: string,
-    prefix: string[]|string
+    prefix: string[]|string|any
 }
 
 interface photoMessage {
@@ -210,7 +210,7 @@ export interface ContextMessage {
 
 export interface pluginFormat {
     name: string,
-    aliases: string[],
+    aliases?: string[],
     description: string,
-    execute(context: Context, message: ContextMessage): void
+    execute(context: Context, message: ContextMessage, args: string[]): void
 }

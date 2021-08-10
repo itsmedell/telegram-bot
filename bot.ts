@@ -20,39 +20,39 @@ export async function starts() {
     .catch((errorData: any) => {
         switch (errorData.response.description.toLowerCase()) {
             case "bot token is required":
-                console.log("Token Bot diperlukan!")
+                console.log("Bot token is required!")
                 prompt({
                     type: "password",
                     name: "token",
-                    message: "Masukan token"
+                    message: "Enter Token"
                 }).then((data: any) => {
                     config.token = data.token
                     fs.writeFileSync(locFiles.config, JSON.stringify(config, null, 2))
-                    console.log("Silahkan jalankan ulang bot ini")
+                    console.log(color('[System]', 'yellow'), color("New token has been saved, please restart this program", "green"))
                 })
                 break
             case "not found":
-                console.log("Token bot yang anda masukan tidak ditemukan!")
+                console.log("Bot token that you entered was not found")
                 prompt({
                     type: "password",
                     name: "token",
-                    message: "Masukan token"
+                    message: "Enter Token"
                 }).then((data: any) => {
                     config.token = data.token
                     fs.writeFileSync(locFiles.config, JSON.stringify(config, null, 2))
-                    console.log("Silahkan jalankan ulang bot ini")
+                    console.log(color('[System]', 'yellow'), color("New token has been saved, please restart this program", "green"))
                 })
                 break
             case "unauthorized":
-                console.log("Token yang anda masukan invalid!")
+                console.log("Bot token that you entered is invalid!")
                 prompt({
                     type: "password",
                     name: "token",
-                    message: "Masukan token"
+                    message: "Enter Token"
                 }).then((data: any) => {
                     config.token = data.token
                     fs.writeFileSync(locFiles.config, JSON.stringify(config, null, 2))
-                    console.log("Silahkan jalankan ulang bot ini")
+                    console.log(color('[System]', 'yellow'), color("New token has been saved, please restart this program", "green"))
                 })
                 break
             default:

@@ -33,14 +33,13 @@ export async function MessageHandler(context: Context, rawMessage: any) {
     
     // Command Handler
     if (pluginCall) {
-        pluginCall.execute(context, message)
+        pluginCall.execute(context, message, args)
     } else {
         switch(commandsName) {
             case "hello":
                 context.reply("Hello Worlds", {
                     reply_to_message_id: message.message_id
                 })
-                console.log(isCmd(body, config.prefix))
             break
             case "ping":
                 context.reply("Pong!", {

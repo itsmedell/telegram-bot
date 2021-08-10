@@ -1,13 +1,13 @@
 import { 
     prompt
 } from 'enquirer'
+import fs from 'fs'
 import * as constant from './lib/constant'
 import * as bot from './bot'
 import {
     checkFormatToken, 
     color
 } from './lib/utility'
-import fs from 'fs'
 
 // Variable
 const { locFiles, configure, configureFix } = constant
@@ -21,22 +21,24 @@ if (fs.existsSync(locFiles.config)) {
     .then(async (data: constant.configFormat) => {
         switch(data.prefix) {
             case "multi":
-                console.log(color("[System]", "yellow"), color("Gunakan tanda [,] untuk memisahkan antar prefix", "white"))
+                console.log(color("[System]", "yellow"), color("Please use [,] for separator prefix", "white"))
                 await prompt({
                     type: "input",
                     name: "prefix",
-                    message: "Masukan prefix"
+                    message: "Enter Prefix"
                 }).then((res: any) => {
                     data.prefix = res.prefix.split(",")
+                    data.prefix.push("/")
                 })
             break
             case "single":
                 await prompt({
                     type: "input",
                     name: "prefix",
-                    message: "Masukan prefix"
+                    message: "Enter Prefix"
                 }).then((res: any) => {
-                    data.prefix = res.prefix
+                    data.prefix = [res.prefix]
+                    data.prefix.push("/")
                 })
             break
             default:
@@ -44,9 +46,9 @@ if (fs.existsSync(locFiles.config)) {
         }
         if (!checkFormatToken(data.token)) {
             let retry = false
-            console.log(color("[System]", "yellow"), color("Format token yang anda masukan salah!", "red"))
+            console.log(color("[System]", "yellow"), color("Invalid token format!", "red"))
             prompt(configureFix)
-            .then((result: any) => {
+            .then(async (result: any) => {
                 switch(result.confirm) {
                     case 'yes':
                         retry = true
@@ -61,20 +63,20 @@ if (fs.existsSync(locFiles.config)) {
                     prompt({
                         type: 'password',
                         name: 'token',
-                        message: "Masukan token"
+                        message: "Enter Token"
                     }).then((response: any) => {
                         data.token = response.token
                         fs.writeFileSync(locFiles.config, JSON.stringify(data, null, 2))
-                        console.log(color("[System]", "yellow"), color("Silahkan jalankan ulang bot ini", "green"))
+                        console.log(color("[System]", "yellow"), color("Configuration has been saved, please start again", "green"))
                     })
                 } else {
                     fs.writeFileSync(locFiles.config, JSON.stringify(data, null, 2))
-                    console.log(color("[System]", "yellow"), color("Silahkan jalankan ulang bot ini", "green"))
+                    console.log(color("[System]", "yellow"), color("Configuration has been saved, please start again", "green"))
                 }
             })
         } else {
             fs.writeFileSync(locFiles.config, JSON.stringify(data, null, 2))
-            console.log(color("[System]", "yellow"), color("Silahkan jalankan ulang bot ini", "green"))
+            console.log(color("[System]", "yellow"), color("Configuration has been saved, please start again", "green"))
         }
     })
 }

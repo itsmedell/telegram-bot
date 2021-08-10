@@ -1,6 +1,9 @@
-import chalk from "chalk"
+import chalk, { stderr } from "chalk"
+import { exec } from "child_process"
 import fs from 'fs'
 import moment from "moment"
+import path from 'path'
+import { Context } from "telegraf"
 import { ContextMessage } from "./constant"
 
 /**
@@ -32,34 +35,27 @@ export function countAllDirFiles(locationDir: string) {
     }
 }
 
-export function isCmd(message: string, prefix: string[]|string) {
-    let match = true
+export function isCmd(message: string, prefix: string[] | string) {
+    let match: boolean
     if (!Array.isArray(prefix)) {
         prefix = [prefix]
     }
     Object.keys(prefix).forEach((i) => {
         if (message.startsWith(prefix[i])) {
+            match = true
+        } else {
             match = false
         }
     })
     return match
 }
 
-export function hasNewMessage(message: ContextMessage[]) {
-    if (!Array.isArray(message)) {
-        message = [message]
-    }
+export function hasNewMessage(message: ContextMessage) {
     let match: boolean
-    const listDate = []
-    Object.keys(message).forEach((i) => {
-        listDate.push(message[i].date)
-    })
-    Object.keys(listDate).forEach((i) => {
-        if (moment(listDate[i] * 1000).format('DD/MM/YY HH:mm:ss') === moment().format("DD/MM/YY HH:mm:ss")) {
-            match = true
-        } else {
-            match = false
-        }
-    })
+    if (moment(message.date * 1000).format('DD/MM/YY HH:mm:ss') === moment().format("DD/MM/YY HH:mm:ss")) {
+        match = true
+    } else {
+        match = false
+    }
     return match
 }
