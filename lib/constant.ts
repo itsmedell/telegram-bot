@@ -1,5 +1,13 @@
 import { Context } from "telegraf"
 
+export enum locFiles {
+    config = './data/bot/config.json',
+    data = './data/',
+    plugin = './plugin/',
+    lib = './lib/',
+    func = './function/'
+}
+
 export const configure = [
     {
         type: "input",
@@ -30,14 +38,6 @@ export const configureFix = {
         "yes",
         "no"
     ]
-}
-
-export enum locFiles {
-    config = './data/bot/config.json',
-    data = './data/',
-    plugin = './plugin/',
-    lib = './lib/',
-    func = './function/'
 }
 
 export enum typeChat {
