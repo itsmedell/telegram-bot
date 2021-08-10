@@ -1,3 +1,3 @@
-yarn startBot
+ts-node index.ts
 clear
-yarn startBot
+ts-node index.ts

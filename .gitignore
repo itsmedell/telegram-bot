@@ -4,3 +4,4 @@ yarn-error.log
 data/bot/*.json
 data/user/*.json
 data/group/*.json
+test

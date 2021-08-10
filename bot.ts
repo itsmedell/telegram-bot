@@ -61,13 +61,8 @@ export async function starts() {
     })
 
     // Log Info Script
-    console.log(color('=> Successfully loaded!', 'yellow'), color('Plugin:', 'yellow'), color(countAllDirFiles(locFiles.plugin).toString(), 'green'),
-    color('Library:', 'yellow'), color(countAllDirFiles(locFiles.lib).toString(), 'green'), color('Function:', 'yellow'), color(countAllDirFiles(locFiles.func).toString(), 'green'),
-    color('Database:', 'yellow'), color(countAllDirFiles(locFiles.data).toString(), 'green'))
-    console.log(color('=> Bot Version:', 'yellow'), color(pkg.version))
-    console.log(color('=> Bug? Error? Saran?:', 'yellow'), color(pkg.bugs.url, 'green'))
-    console.log(color('[TeleBot]', 'cyan'), color('Sekarang bot sudah menyala!', 'yellow'))
-    console.log(color('[Author]', 'cyan'), color("Semoga kalian suka dengan script ini :)", 'yellow'))
+    console.log(color('[TeleBot]:', 'cyan'), color('Bot is online', 'yellow'))
+    console.log(color('[Author]:', 'cyan'), color("I hope you like it this scripts", 'yellow'))
 
     // Handler
     handler.EventsHandler(bot)

@@ -12,8 +12,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "sh script/start.sh",
-    "startBot": "ts-node index.ts",
+    "start": "script/start.sh",
     "build": "tsc",
     "configure": "ts-node lib/configure.ts"
   },
