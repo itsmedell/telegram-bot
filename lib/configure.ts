@@ -15,7 +15,7 @@ prompt(configure)
 .then(async (data: constant.configFormat) => {
     switch (data.prefix) {
         case "multi":
-            console.log(color("[System]", "yellow"), color("Gunakan tanda [,] untuk memisahkan antar prefix", "white"))
+            console.log(color("[System]", "yellow"), color("Please use [,] for separator between prefix", "white"))
             await prompt({
                 type: "input",
                 name: "prefix",
@@ -40,7 +40,7 @@ prompt(configure)
     }
     if (!checkFormatToken(data.token)) {
         let retry = false
-        console.log(color("[System]", "yellow"), color("Format token yang anda masukan salah!", "red"))
+        console.log(color("[System]", "yellow"), color("Format token you entered invalid!", "red"))
         prompt(configureFix)
             .then((result: any) => {
                 switch (result.confirm) {
@@ -61,15 +61,15 @@ prompt(configure)
                     }).then((response: any) => {
                         data.token = response.token
                         fs.writeFileSync(locFiles.config, JSON.stringify(data, null, 2))
-                        console.log(color("[System]", "yellow"), color("Configuration has saved.", "green"))
+                        console.log(color("[System]", "yellow"), color("Configuration has been saved.", "green"))
                     })
                 } else {
                     fs.writeFileSync(locFiles.config, JSON.stringify(data, null, 2))
-                    console.log(color("[System]", "yellow"), color("Configuration has saved.", "green"))
+                    console.log(color("[System]", "yellow"), color("Configuration has been saved.", "green"))
                 }
             })
     } else {
         fs.writeFileSync(locFiles.config, JSON.stringify(data, null, 2))
-        console.log(color("[System]", "yellow"), color("Configuration has saved.", "green"))
+        console.log(color("[System]", "yellow"), color("Configuration has been saved.", "green"))
     }
 })

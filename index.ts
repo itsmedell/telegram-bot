@@ -21,7 +21,7 @@ if (fs.existsSync(locFiles.config)) {
     .then(async (data: constant.configFormat) => {
         switch(data.prefix) {
             case "multi":
-                console.log(color("[System]", "yellow"), color("Please use [,] for separator prefix", "white"))
+                console.log(color("[System]", "yellow"), color("Please use [,] for separator between prefix", "white"))
                 await prompt({
                     type: "input",
                     name: "prefix",
