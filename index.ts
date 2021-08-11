@@ -57,7 +57,7 @@ if (fs.existsSync(locFiles.config)) {
                         retry = false
                     break
                     default:
-                        retry = false
+                        return
                 }
                 if (retry) {
                     prompt({
