@@ -1,5 +1,4 @@
 # <p align="center">Telegram Bot</p>
- Project ini secara resmi, tidak dilanjutkan!
 
 ## 📑 Requirements
 - [Git](https://git-scm.com/downloads)

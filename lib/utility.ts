@@ -1,3 +1,4 @@
+import axios from "axios"
 import chalk, { stderr } from "chalk"
 import { exec } from "child_process"
 import fs from 'fs'
@@ -58,4 +59,9 @@ export function hasNewMessage(message: ContextMessage) {
         match = false
     }
     return match
+}
+
+export async function shortLinks(url: string) {
+    const results = await axios.get(`http://tinyurl.com/api-create.php?url=${url}`)
+    return results.data
 }
