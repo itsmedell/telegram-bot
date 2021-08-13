@@ -27,6 +27,10 @@ export function color(text: string, color?: string) {
     return color ? chalk.keyword(color)(text) : chalk.green(text)
 }
 
+export function bgcolor(text: string, color?: string) {
+    return color ? chalk.bgKeyword(color)(text) : chalk.bgGreen(text)
+}
+
 export function countAllDirFiles(locationDir: string) {
     if (fs.existsSync(locationDir)) {
         const files = fs.readdirSync(locationDir).filter(file => file.endsWith('.ts') || file.endsWith('.json'))
@@ -36,19 +40,13 @@ export function countAllDirFiles(locationDir: string) {
     }
 }
 
-export function isCmd(message: string, prefix: string[] | string) {
-    let match: boolean
-    if (!Array.isArray(prefix)) {
-        prefix = [prefix]
-    }
+export function isCmd(message: string, prefix: string[]) {
+    let rawRegex = '^['
     Object.keys(prefix).forEach((i) => {
-        if (message.startsWith(prefix[i])) {
-            match = true
-        } else {
-            match = false
-        }
+        rawRegex += `${prefix[i]}|`
     })
-    return match
+    const regex = new RegExp(`${rawRegex}]`)
+    return regex.test(message)
 }
 
 export function hasNewMessage(message: ContextMessage) {

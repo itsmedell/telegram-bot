@@ -2,9 +2,10 @@ import {
     Context
 } from "telegraf";
 import { configFormat, ContextMessage, locFiles, pluginFormat } from "../lib/constant";
-import { hasNewMessage, isCmd } from "../lib/utility";
+import { color, hasNewMessage, isCmd } from "../lib/utility";
 import fs from 'fs'
 import Collection from "@discordjs/collection";
+import moment from "moment";
 
 // Plugin Loader
 const plugins: any = new Collection();
@@ -30,8 +31,18 @@ export async function MessageHandler(context: Context, rawMessage: any) {
     const commandsName = body.slice(1).trim().split(/ +/).shift().toLowerCase()
     const args = body.trim().split(/ +/).slice(1)
     const q = args.join(" ")
+    const isCommand = isCmd(body, config.prefix)
     const pluginCall = plugins.get(commandsName) || plugins.find(cmd => cmd.aliases && cmd.aliases.includes(commandsName))
     
+    // Log Commands
+    if (isCommand) {
+        const chatColor = `${color('[', 'cyan')}${color(`${message.chat.type}`.toUpperCase(), 'orange')}${color(']', 'cyan')}`
+        const clockColor = `${color('[', 'cyan')}${color(moment().format('HH:mm:ss'), 'yellow')}${color(']', 'cyan')}`
+        const userColor = `${color('[', 'cyan')}${color(`${message.from.username}`, 'magenta')}${color(']', 'cyan')}`
+        console.log(`${color('╭─', 'cyan')}${chatColor}${color('──', 'cyan')}${clockColor}${color('──', 'cyan')}${userColor}`)
+        console.log(`${color('╰─[', 'cyan')}${commandsName}${color(']', 'cyan')}${color('[', 'cyan')}${color(`${args.length}`, 'yellow')}${color(']', 'cyan')}`)
+    }
+
     // Command Handler
     if (pluginCall) {
         pluginCall.execute(context, message, args)
@@ -68,7 +79,7 @@ export async function MessageHandler(context: Context, rawMessage: any) {
             break
 
             default:
-                if (isCmd(body, config.prefix)) {
+                if (isCommand) {
                     context.reply("Command not found!", {
                         reply_to_message_id: message.message_id
                     })
