@@ -3,7 +3,6 @@ import chalk, { stderr } from "chalk"
 import { exec } from "child_process"
 import fs from 'fs'
 import moment from "moment"
-import path from 'path'
 import { Context } from "telegraf"
 import { ContextMessage } from "./constant"
 
@@ -27,10 +26,21 @@ export function color(text: string, color?: string) {
     return color ? chalk.keyword(color)(text) : chalk.green(text)
 }
 
+/**
+ * Change text background color
+ * @param text 
+ * @param color 
+ * @returns Text with background color
+ */
 export function bgcolor(text: string, color?: string) {
     return color ? chalk.bgKeyword(color)(text) : chalk.bgGreen(text)
 }
 
+/**
+ * Count all files in directory
+ * @param locationDir 
+ * @returns Total Files
+ */
 export function countAllDirFiles(locationDir: string) {
     if (fs.existsSync(locationDir)) {
         const files = fs.readdirSync(locationDir).filter(file => file.endsWith('.ts') || file.endsWith('.json'))
@@ -40,6 +50,12 @@ export function countAllDirFiles(locationDir: string) {
     }
 }
 
+/**
+ * isCmd
+ * @param message 
+ * @param prefix 
+ * @returns true or false 
+ */
 export function isCmd(message: string, prefix: string[]) {
     let rawRegex = '^['
     Object.keys(prefix).forEach((i) => {
@@ -49,6 +65,11 @@ export function isCmd(message: string, prefix: string[]) {
     return regex.test(message)
 }
 
+/**
+ * check if message is newest or latest
+ * @param message 
+ * @returns true or false
+ */
 export function hasNewMessage(message: ContextMessage) {
     let match: boolean
     if (moment(message.date * 1000).format('DD/MM/YY HH:mm:ss') === moment().format("DD/MM/YY HH:mm:ss")) {
@@ -59,7 +80,23 @@ export function hasNewMessage(message: ContextMessage) {
     return match
 }
 
+/**
+ * Shortlinks function
+ * @param url 
+ * @returns short url
+ */
 export async function shortLinks(url: string) {
     const results = await axios.get(`http://tinyurl.com/api-create.php?url=${url}`)
     return results.data
+}
+
+/**
+ * Get all files from directory
+ * @param directory 
+ * @param filter 
+ * @returns List files
+ */
+export function loadAllDirFiles(directory:string, filter: string) {
+    const data = fs.readdirSync(directory).filter(file => file.endsWith(filter))
+    return data
 }

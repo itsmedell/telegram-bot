@@ -1,0 +1,23 @@
+[
+    {
+        "name": "say",
+        "aliases": [],
+        "description": "Resay what are you write",
+        "category": "regular",
+        "permission": "normal"
+    },
+    {
+        "name": "hello",
+        "aliases": ["hai"],
+        "description": "Say hello",
+        "category": "regular",
+        "permission": "normal"
+    },
+    {
+        "name": "ping",
+        "aliases": ["pong"],
+        "description": "Check bot speed",
+        "category": "bot", 
+        "permisson": "normal"
+    }
+]

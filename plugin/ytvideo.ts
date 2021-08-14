@@ -10,6 +10,8 @@ export = {
     name: "ytmp4",
     aliases: ["ytvideo", "ytvid", "ytv"],
     description: "Download Video from Youtube",
+    category: "downloader",
+    permission: "normal",
     async execute(ctx: Context, message: ContextMessage, args: string[]) {
         const wrongUrlList = ["that's is not a valid youtube url", "I'm sorry but that is not youtube url", "Can you send a valid youtube url?"]
         const randomWrongUrlMsg = wrongUrlList[Math.floor(Math.random() * wrongUrlList.length)]

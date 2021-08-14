@@ -211,9 +211,22 @@ export interface ContextMessage {
     poll?: pollMessage
 }
 
+type permission = "normal" | "owner" | "premium"
+type category = 'downloader' | 'bot' | 'game' | 'regular' | 'media'
+
+export interface menuList {
+    name: string,
+    aliases?: string[],
+    description?: string,
+    category: category,
+    permission: permission
+}
+
 export interface pluginFormat {
     name: string,
     aliases?: string[],
-    description: string,
+    description?: string,
+    category: category,
+    permission: permission
     execute(context: Context, message: ContextMessage, args: string[]): void
 }

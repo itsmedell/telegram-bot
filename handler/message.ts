@@ -23,16 +23,17 @@ const config: configFormat = fs.existsSync(locFiles.config) && JSON.parse(fs.rea
  * @param context 
  */
 export async function MessageHandler(context: Context, rawMessage: any) {
+    const message: ContextMessage = rawMessage
     if (!context.message) return
     if (!hasNewMessage(rawMessage)) return
-    const message: ContextMessage = rawMessage
+    if (message.from.is_bot) return
     const { text, video, sticker, audio, caption, animation, document, photo } = message
     const body = (text) ? text : (video && caption) ? caption : (photo && caption) ? caption : (audio && caption) ? caption : (document && caption) ? caption : ''
     const commandsName = body.slice(1).trim().split(/ +/).shift().toLowerCase()
     const args = body.trim().split(/ +/).slice(1)
     const q = args.join(" ")
     const isCommand = isCmd(body, config.prefix)
-    const pluginCall = plugins.get(commandsName) || plugins.find(cmd => cmd.aliases && cmd.aliases.includes(commandsName))
+    const pluginCall: pluginFormat = plugins.get(commandsName) || plugins.find(cmd => cmd.aliases && cmd.aliases.includes(commandsName))
     
     // Log Commands
     if (isCommand) {
@@ -48,21 +49,27 @@ export async function MessageHandler(context: Context, rawMessage: any) {
         pluginCall.execute(context, message, args)
     } else {
         switch(commandsName) {
-            // Greetings Features
+            // Basic Features
             case "hello":
-                context.reply("Hello Worlds", {
+                context.reply(`Hello ${message.from.username}`, {
                     reply_to_message_id: message.message_id
                 })
             break
 
-            // Utility Features
+            // Check / Testing features
             case "ping":
                 context.reply("Pong!", {
                     reply_to_message_id: message.message_id
                 })
             break
 
-            // Games Features
+            // Fun Menu
+            case "say":
+                if (!q) return context.reply("What should I say?", {
+                    reply_to_message_id: message.message_id
+                })
+                context.reply(q)
+            break
             case "is":
             case "eightball":
             case "8ball":
@@ -78,6 +85,7 @@ export async function MessageHandler(context: Context, rawMessage: any) {
                 })
             break
 
+            // Response if command / features are typo or doesn't exist
             default:
                 if (isCommand) {
                     context.reply("Command not found!", {
