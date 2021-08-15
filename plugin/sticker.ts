@@ -8,6 +8,8 @@ export = {
     category: "converter",
     permission: "free",
     execute(ctx: Context, message: ContextMessage, args: string[]) {
-
+        ctx.reply("Coming Soon!", {
+            reply_to_message_id: message.message_id
+        })
     }
 }
