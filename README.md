@@ -15,7 +15,8 @@
 #
 
 ## ⚙️ **Installation**
-> Linux
+
+> **Linux**
 ```bash
 > sudo apt update && sudo apt upgrade # Optional
 > sudo apt install git nodejs
@@ -26,7 +27,7 @@
 > yarn start
 ```
 
-> Termux
+> **Termux**
 ```bash
 > pkg update && pkg upgrade # Optional
 > pkg install git nodejs
