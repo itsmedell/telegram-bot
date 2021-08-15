@@ -49,27 +49,26 @@ export async function MessageHandler(context: Context, rawMessage: any) {
         pluginCall.execute(context, message, args)
     } else {
         switch(commandsName) {
-            // Basic Features
+            // Regular Category
             case "hello":
                 context.reply(`Hello ${message.from.username}`, {
                     reply_to_message_id: message.message_id
                 })
             break
-
-            // Check / Testing features
             case "ping":
                 context.reply("Pong!", {
                     reply_to_message_id: message.message_id
                 })
             break
-
-            // Fun Menu
             case "say":
                 if (!q) return context.reply("What should I say?", {
                     reply_to_message_id: message.message_id
                 })
                 context.reply(q)
             break
+
+            // Bot Category
+            // Game Category
             case "is":
             case "eightball":
             case "8ball":
