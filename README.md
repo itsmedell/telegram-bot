@@ -1,13 +1,14 @@
 # <p align="center">Telegram Bot</p>
 
-```txt
-This script telegram still under development,
-so if you found a bug please create issues.
+<p align="center">
+    <a href="https://github.com/lendradev/#readme"><img src="https://img.shields.io/github/license/lendradev/telegram-bot?color=blue&label=License&logo=github&style=flat-square"></a>
+    <a href="https://github.com/lendradev/#readme"><img src="https://img.shields.io/github/package-json/v/lendradev/telegram-bot?color=blue&label=Version&logo=github&style=flat-square"></a>
+    <a href="https://github.com/lendradev/#readme"><img src="https://img.shields.io/github/repo-size/lendradev/telegram-bot?label=Size&logo=github&style=flat-square"></a>
+</p>
 
-- Developer
-```
+#
 
-## 📑 Requirements
+*** 📑 Requirements ***
 - [Git](https://git-scm.com/downloads)
 - [NodeJS](https://nodejs.org/en/download)
 
