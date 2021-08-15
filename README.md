@@ -1,5 +1,12 @@
 # <p align="center">Telegram Bot</p>
 
+```txt
+This script telegram still under development
+so if you found a bug please create issues
+
+- Developer
+```
+
 ## 📑 Requirements
 - [Git](https://git-scm.com/downloads)
 - [NodeJS](https://nodejs.org/en/download)
