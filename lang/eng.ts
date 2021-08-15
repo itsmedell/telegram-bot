@@ -13,7 +13,3 @@ export function ytResult(title: string, author: string, duration: string, viewCo
 ╰───────    
 `
 }
-
-export function menu(name:string, ) {
-    
-}
