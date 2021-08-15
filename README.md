@@ -1,8 +1,8 @@
 # <p align="center">Telegram Bot</p>
 
 ```txt
-This script telegram still under development
-so if you found a bug please create issues
+This script telegram still under development,
+so if you found a bug please create issues.
 
 - Developer
 ```
