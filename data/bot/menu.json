@@ -18,6 +18,13 @@
         "aliases": ["pong"],
         "description": "Check bot speed",
         "category": "bot", 
-        "permisson": "normal"
+        "permission": "normal"
+    },
+    {
+        "name": "is",
+        "aliases": ["eightball", "8ball"],
+        "description": "Answer your random question, with random answer too",
+        "category": "game", 
+        "permission": "free"
     }
 ]

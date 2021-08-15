@@ -41,7 +41,7 @@ export async function MessageHandler(context: Context, rawMessage: any) {
         const clockColor = `${color('[', 'cyan')}${color(moment().format('HH:mm:ss'), 'yellow')}${color(']', 'cyan')}`
         const userColor = `${color('[', 'cyan')}${color(`${message.from.username}`, 'magenta')}${color(']', 'cyan')}`
         console.log(`${color('╭─', 'cyan')}${chatColor}${color('──', 'cyan')}${clockColor}${color('──', 'cyan')}${userColor}`)
-        console.log(`${color('╰─[', 'cyan')}${commandsName}${color(']', 'cyan')}${color('[', 'cyan')}${color(`${args.length}`, 'yellow')}${color(']', 'cyan')}`)
+        console.log(`${color('╰──[', 'cyan')}${commandsName}${color(']', 'cyan')}${color('[', 'cyan')}${color(`${args.length}`, 'yellow')}${color(']', 'cyan')}`)
     }
 
     // Command Handler

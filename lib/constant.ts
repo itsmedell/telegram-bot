@@ -211,8 +211,8 @@ export interface ContextMessage {
     poll?: pollMessage
 }
 
-type permission = "normal" | "owner" | "premium"
-type category = 'downloader' | 'bot' | 'game' | 'regular' | 'media'
+type permission = "free" | "owner" | "premium"
+type category = 'downloader' | 'bot' | 'game' | 'regular' | 'media' | 'converter'
 
 export interface menuList {
     name: string,

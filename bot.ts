@@ -61,8 +61,8 @@ export async function starts() {
     })
 
     // Log Info Script
-    console.log(color('[TeleBot]:', 'cyan'), color('Bot is online', 'yellow'))
-    console.log(color('[Author]:', 'cyan'), color("I hope you like it this scripts", 'yellow'))
+    console.log(color('[TeleBot]', 'cyan'), color('Bot is online', 'yellow'))
+    console.log(color('[Author]', 'cyan'), color("I hope you like it this scripts", 'yellow'))
 
     // Handler
     handler.EventsHandler(bot)

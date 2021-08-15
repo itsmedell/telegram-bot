@@ -11,7 +11,7 @@ export = {
     aliases: ["guide", "help"],
     description: "Send list features of bot",
     category: "bot",
-    permission: "normal",
+    permission: "free",
     async execute(ctx: Context, message: ContextMessage, args: string[]) {
         const totalFeatures: menuList[] = []
         const rawFiles = loadAllDirFiles("./plugin", ".ts")
@@ -25,7 +25,7 @@ export = {
                 category: menu.category,
                 permission: menu.permission
             }
-            totalFeatures.push(menu)
+            totalFeatures.push(object)
         }
         // Plugin
         for (let files of rawFiles) {
@@ -40,38 +40,44 @@ export = {
             totalFeatures.push(object)
         }
 
-        let headerMenu = '╭───< ᴍᴇɴᴜ >───\n'
-        let regularHeader = '├──< ʀᴇɢᴜʟᴀʀ >──\n'
-        let mediaHeader = '├──< ᴍᴇᴅɪᴀ >──\n'
-        let botHeader = '├──< ʙᴏᴛ >──\n'
-        let gameHeader = '├──< ɢᴀᴍᴇ >──\n'
-        let dlHeader = '├──< ᴅᴏᴡɴʟᴏᴀᴅᴇʀ >───\n'
-        let defaultHeader = '├─< ᴏᴛʜᴇʀ >──\n'
+        let headerMenu = '────< ᴀʙᴏᴜᴛ >────\n'
+        let regularHeader = '───< ʀᴇɢᴜʟᴀʀ >───\n'
+        let mediaHeader = '───< ᴍᴇᴅɪᴀ >───\n'
+        let botHeader = '───< ʙᴏᴛ >───\n'
+        let gameHeader = '───< ɢᴀᴍᴇ >───\n'
+        let dlHeader = '───< ᴅᴏᴡɴʟᴏᴀᴅᴇʀ >───\n'
+        let defaultHeader = '───< ᴏᴛʜᴇʀ >───\n'
+        let converterHeader = '───< ᴄᴏɴᴠᴇʀᴛᴇʀ >───\n'
         for (let features of totalFeatures) {
-            const name = features.permission == 'premium' ? `${features.name}(Premium)` : features.name
+            const name = features.name
+            const aliases = features.aliases.length < 1 ? '' : `\n*Aliases*: ${features.aliases}`
+            const description = features.description.length <= 33 ? features.description : `\n${features.description}`
             switch(features.category) {
                 case 'bot':
-                    botHeader += `├> ${name}\n`
+                    botHeader += `*Name*: ${name}${aliases}\n*Description*: ${description}\n*Permission*: ${features.permission}\n\n`
                 break
                 case 'regular':
-                    regularHeader += `├> ${name}\n`
+                    regularHeader += `*Name*: ${name}${aliases}\n*Description*: ${description}\n*Permission*: ${features.permission}\n\n`
                 break
                 case 'downloader':
-                    dlHeader += `├> ${name}\n`
+                    dlHeader += `*Name*: ${name}${aliases}\n*Description*: ${description}\n*Permission*: ${features.permission}\n\n`
                 break
                 case 'game':
-                    gameHeader += `├> ${name}\n`
+                    gameHeader += `*Name*: ${name}${aliases}\n*Description*: ${description}\n*Permission*: ${features.permission}\n\n`
                 break
+                case 'converter':
+                    converterHeader += `*Name*: ${name}${aliases}\n*Description*: ${description}\n*Permission*: ${features.permission}\n\n`
                 case 'media':
-                    mediaHeader += `├> ${name}\n`
+                    mediaHeader += `*Name*: ${name}${aliases}\n*Description*: ${description}\n*Permission*: ${features.permission}\n\n`
                 break
                 default:
-                    defaultHeader += `├> ${name}\n`
+                    defaultHeader += `*Name*: ${name}${aliases}\n*Description*: ${description}\n*Permission*: ${features.permission}\n\n`
             }
         }
-        const formatList = `${headerMenu}${dlHeader}${regularHeader}${mediaHeader}${gameHeader}${botHeader}${defaultHeader}`
+        const formatList = `${headerMenu}\n${dlHeader}\n${converterHeader}\n${regularHeader}\n${mediaHeader}\n${gameHeader}\n${botHeader}\n${defaultHeader}`
         ctx.reply(formatList, {
-            reply_to_message_id: message.message_id
+            reply_to_message_id: message.message_id,
+            parse_mode: 'Markdown'
         })
     }
 }
