@@ -8,11 +8,13 @@
 
 #
 
-*** 📑 Requirements ***
+## 📑 **Requirements**
 - [Git](https://git-scm.com/downloads)
 - [NodeJS](https://nodejs.org/en/download)
 
-## ⚙️ Installation
+#
+
+## ⚙️ **Installation**
 > Linux
 ```bash
 > sudo apt update && sudo apt upgrade # Optional
