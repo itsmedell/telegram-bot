@@ -25,7 +25,7 @@ export = {
             })
             try {
                 const resultValue = await ytdl.getInfo(yturl)
-                const { url } = chooseQuality(resultValue.formats, '134', '136')
+                const { url } = chooseQuality(resultValue.formats, '22', '136')
                 const { lengthSeconds, viewCount, title, uploadDate, likes, author, thumbnails } = resultValue.videoDetails
                 const thumbs = thumbnails[Math.floor(Math.random() * thumbnails.length)]
                 const resultMessage = msg.ytResult(title, author.name, lengthSeconds, viewCount, uploadDate, 'mp4')
