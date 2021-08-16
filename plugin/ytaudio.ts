@@ -19,6 +19,7 @@ export = {
         const errorMessageList = ["Sorry we can't download your video request", "I think that video is private or doesn't exist", "Sorry we failed to process that video"]
         const randomErrorMessage = errorMessageList[Math.floor(Math.random() * errorMessageList.length)]
         const yturl = args.length !== 0 ? args[0] : ''
+        const dlurl = []
         if (!yturl) return ctx.reply("Youtube url is required!", {reply_to_message_id: message.message_id})
         if (ytdl.validateURL(yturl)) {
             await ctx.reply("Please wait your request is being processed", {
@@ -28,6 +29,7 @@ export = {
                 const resultValue = await ytdl.getInfo(yturl)
                 const formats = ytdl.filterFormats(resultValue.formats, 'audioonly')
                 const { url } = chooseQuality(formats, '140', '251')
+                dlurl.push(url)
                 const { lengthSeconds, viewCount, title, uploadDate, likes, author, thumbnails } = resultValue.videoDetails
                 const thumbs = thumbnails[Math.floor(Math.random() * thumbnails.length)]
                 const resultMessage = msg.ytResult(title, author.name, lengthSeconds, viewCount, uploadDate, 'mp3')
@@ -53,8 +55,10 @@ export = {
                     })
                 }
             } catch (error) {
-                console.log(error)
-                ctx.reply(randomErrorMessage, {
+                ctx.reply("Sorry not we can't send your video", {
+                    reply_to_message_id: message.message_id
+                })
+                ctx.reply(`Here's the download url if you wanna download it manually\n${await shortLinks(dlurl[0])}`, {
                     reply_to_message_id: message.message_id
                 })
             }
