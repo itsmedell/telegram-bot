@@ -20,11 +20,11 @@ const config: configFormat = fs.existsSync(locFiles.config) && JSON.parse(fs.rea
 
 /**
  * Message / Command handler
- * @param context 
+ * @param ctx 
  */
-export async function MessageHandler(context: Context, rawMessage: any) {
+export async function MessageHandler(ctx: Context, rawMessage: any) {
     const message: ContextMessage = rawMessage
-    if (!context.message) return
+    if (!ctx.message) return
     if (!hasNewMessage(rawMessage)) return
     if (message.from.is_bot) return
     const { text, video, sticker, audio, caption, animation, document, photo } = message
@@ -47,25 +47,25 @@ export async function MessageHandler(context: Context, rawMessage: any) {
     // Command Handler
     if (pluginCall) {
         // Plugin Handler
-        pluginCall.execute(context, message, args)
+        pluginCall.execute(ctx, message, args)
     } else {
         switch(commandsName) {
             // Regular Category
             case "hello":
-                context.reply(`Hello ${message.from.username}`, {
+                ctx.reply(`Hello ${message.from.username}`, {
                     reply_to_message_id: message.message_id
                 })
             break
             case "ping":
-                context.reply("Pong!", {
+                ctx.reply("Pong!", {
                     reply_to_message_id: message.message_id
                 })
             break
             case "say":
-                if (!q) return context.reply("What should I say?", {
+                if (!q) return ctx.reply("What should I say?", {
                     reply_to_message_id: message.message_id
                 })
-                context.reply(q)
+                ctx.reply(q)
             break
 
             // Bot Category
@@ -73,13 +73,13 @@ export async function MessageHandler(context: Context, rawMessage: any) {
             case "is":
             case "eightball":
             case "8ball":
-                if (!q) return context.reply("Please send your question", {
+                if (!q) return ctx.reply("Please send your question", {
                     reply_to_message_id: message.message_id
                 })
                 const listAnswer = ["no", "yes", "i don't know", "maybe", "maybe not", "never", "i don't think so"]
                 const randomAnswer = listAnswer[Math.floor(Math.random() * listAnswer.length)]
                 const formatMessage = `*🎱 Features*\n\n*Question*: ${q}\n*Answer*: ${randomAnswer}`
-                context.reply(formatMessage, {
+                ctx.reply(formatMessage, {
                     reply_to_message_id: message.message_id,
                     parse_mode: 'Markdown'
                 })
@@ -88,7 +88,7 @@ export async function MessageHandler(context: Context, rawMessage: any) {
             // Response if command / features are typo or doesn't exist
             default:
                 if (isCommand) {
-                    context.reply("Command not found!", {
+                    ctx.reply("Command not found!", {
                         reply_to_message_id: message.message_id
                     })
                 }

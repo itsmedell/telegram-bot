@@ -25,10 +25,10 @@ export function shortNumberFormat(value: number): string {
     return `${resultValue}${formatList[formatNumber]}`
 }
 
-export function chooseQuality(format: videoFormat[], target: string) {
+export function chooseQuality(format: videoFormat[], target: string, alternative: string) {
     try {
         return ytdl.chooseFormat(format, {quality: target})
     } catch (error) {
-        return ytdl.chooseFormat(format, {quality: '134'})
+        return ytdl.chooseFormat(format, {quality: alternative})
     }
 }

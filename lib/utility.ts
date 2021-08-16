@@ -100,3 +100,10 @@ export function loadAllDirFiles(directory:string, filter: string) {
     const data = fs.readdirSync(directory).filter(file => file.endsWith(filter))
     return data
 }
+
+export async function getBuffer(url: string) {
+    const { data } = await axios.get(url, {
+        responseType: 'arraybuffer'
+    })
+    return data
+}
