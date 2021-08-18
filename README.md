@@ -46,10 +46,10 @@
 <summary>Regular</summary>
 <br>
 
-| Stats | Name  | Aliases | Arguments |
-|:-----:|:------|:-------:|:---------:|
-|   ✅   | hello |   hai   |   none    |
-|   ✅   | say   |  none   |   none    |
+| Name  | Aliases | Arguments |
+|:------|:-------:|:---------:|
+| hello |   hai   |   none    |
+| say   |  none   |   none    |
 
 
 </details>
@@ -60,10 +60,10 @@
 <summary>Downloader</summary>
 <br>
 
-| Stats | Name  |   Aliases    | Arguments |      Description       |
-|:-----:|:-----:|:------------:|:---------:|:----------------------:|
-|   ✅   | ytmp3 | ytaudio, yta |   [url]   | Download youtube audio |
-|   ✅   | ytmp4 |  ytvid, ytv  |   [url]   | Download youtube video |
+| Name  |   Aliases    | Arguments |      Description       |
+|:-----:|:------------:|:---------:|:----------------------:|
+| ytmp3 | ytaudio, yta |   [url]   | Download youtube audio |
+| ytmp4 |  ytvid, ytv  |   [url]   | Download youtube video |
 
 </details>
 
@@ -74,9 +74,9 @@
 <summary>Bot</summary>
 <br>
 
-| Stats | Name |   Aliases   | Arguments |         Description         |
-|:-----:|:----:|:-----------:|:---------:|:---------------------------:|
-|   ✅   | ping |    pong     |   none    |      Send pong message      |
-|   ✅   | menu | help, guide |   none    | Send all guide bot features |
+| Name |   Aliases   | Arguments |         Description         |
+|:----:|:-----------:|:---------:|:---------------------------:|
+| ping |    pong     |   none    |      Send pong message      |
+| menu | help, guide |   none    | Send all guide bot features |
 
 </details>
