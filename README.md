@@ -41,14 +41,34 @@
 # 
 
 ## 📔 Features
+<details>
+<summary>Regular</summary>
+<br>
 
+| Name  | Aliases | Arguments |
+|-------|---------|-----------|
+| hello | hai     | none      |
+| say   | none    | none      |
+
+
+</details>
+<h1></h1>
 <details>
 <summary>Downloader</summary>
 <br>
 
-| Name | Aliases | Arguments |
-| :--: | :-----: | :-------: |
-| ytmp4 | ytvid, ytv | url |
-| ytmp3 | ytaudio, yta | url |
+| Name  | Aliases      | Arguments | Description            |
+|-------|--------------|-----------|------------------------|
+| ytmp4 | ytvid, ytv   | [url]     | Download youtube video |
+| ytmp3 | ytaudio, yta | [url]     | Download youtube audio |
+
+</details>
+<h1></h1>
+<details>
+<summary>Bot</summary>
+<br>
+
+| Name | Aliases | Arguments | Description |
+| :--: | :-----: | :-------: | :---------: |
 
 </details>
