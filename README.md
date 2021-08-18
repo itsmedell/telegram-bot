@@ -37,3 +37,17 @@
 > yarn install
 > yarn start
 ```
+
+# 
+
+## 📔 Features
+
+<details>
+<summary>Downloader</summary>
+
+| Name | Aliases | Arguments |
+| :--: | :-----: | :-------: |
+| ytmp4 | ytvid, ytv | url |
+| ytmp3 | ytaudio, yta | url |
+
+</details>
