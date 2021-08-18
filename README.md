@@ -41,34 +41,42 @@
 # 
 
 ## 📔 Features
+<!-- Regular Section -->
 <details>
 <summary>Regular</summary>
 <br>
 
 | Name  | Aliases | Arguments |
-|-------|---------|-----------|
-| hello | hai     | none      |
-| say   | none    | none      |
+|:------|:-------:|:---------:|
+| hello |   hai   |   none    |
+| say   |  none   |   none    |
 
 
 </details>
 <h1></h1>
+
+<!-- Downloader Section -->
 <details>
 <summary>Downloader</summary>
 <br>
 
-| Name  | Aliases      | Arguments | Description            |
-|-------|--------------|-----------|------------------------|
-| ytmp4 | ytvid, ytv   | [url]     | Download youtube video |
-| ytmp3 | ytaudio, yta | [url]     | Download youtube audio |
+| Name  |   Aliases    | Arguments |      Description       |
+|:-----:|:------------:|:---------:|:----------------------:|
+| ytmp3 | ytaudio, yta |   [url]   | Download youtube audio |
+| ytmp4 |  ytvid, ytv  |   [url]   | Download youtube video |
 
 </details>
+
 <h1></h1>
+
+<!-- Bot Section -->
 <details>
 <summary>Bot</summary>
 <br>
 
-| Name | Aliases | Arguments | Description |
-| :--: | :-----: | :-------: | :---------: |
+| Name |   Aliases   | Arguments |         Description         |
+|:----:|:-----------:|:---------:|:---------------------------:|
+| ping |    pong     |   none    |      Send pong message      |
+| menu | help, guide |   none    | Send all guide bot features |
 
 </details>
