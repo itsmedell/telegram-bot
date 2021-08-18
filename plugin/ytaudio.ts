@@ -32,7 +32,15 @@ export = {
                 dlurl.push(url)
                 const { lengthSeconds, viewCount, title, uploadDate, likes, author, thumbnails } = resultValue.videoDetails
                 const thumbs = thumbnails[Math.floor(Math.random() * thumbnails.length)]
-                const resultMessage = msg.ytResult(title, author.name, lengthSeconds, viewCount, uploadDate, 'mp3')
+                const resultMessage = msg.ytResult({
+                    title: title,
+                    author: author.name,
+                    duration: lengthSeconds,
+                    viewCount: viewCount,
+                    uploadDate: uploadDate,
+                    type: "audio",
+                    linkdl: await shortLinks(url),
+                })
                 
                 await ctx.replyWithPhoto(thumbs, {
                     reply_to_message_id: message.message_id,
@@ -40,25 +48,8 @@ export = {
                     parse_mode: "Markdown"
                 })
 
-                await ctx.reply("Please wait your audio will be send", {
-                    reply_to_message_id: message.message_id
-                })
-
-                if (filterDuration(parseInt(lengthSeconds), '5m')) {
-                    await ctx.reply(`Sorry audio duration is too long\nYou can download it at this link: ${await shortLinks(url)}`, {
-                        reply_to_message_id: message.message_id
-                    })
-                } else {
-                    await ctx.replyWithAudio(url, {
-                        reply_to_message_id: message.message_id,
-                        caption: "Here's your audio"
-                    })
-                }
             } catch (error) {
-                ctx.reply("Sorry not we can't send your video", {
-                    reply_to_message_id: message.message_id
-                })
-                ctx.reply(`Here's the download url if you wanna download it manually\n${await shortLinks(dlurl[0])}`, {
+                ctx.reply(randomErrorMessage, {
                     reply_to_message_id: message.message_id
                 })
             }

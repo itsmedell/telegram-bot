@@ -1,7 +1,9 @@
 import moment from "moment"
+import { ytResultEntry } from "../lib/constant"
 import { shortNumberFormat } from "../lib/formatter"
 
-export function ytResult(title: string, author: string, duration: string, viewCount: string, uploadDate: string, tipe: string) {
+export function ytResult(entry: ytResultEntry) {
+    const { title, author, uploadDate, duration, viewCount, type, linkdl } = entry
     return `
 ╭──────
 ├> ${title.length > 17 ? `*Title*:\n${title}` : title}
@@ -9,7 +11,8 @@ export function ytResult(title: string, author: string, duration: string, viewCo
 ├> *Published*: ${uploadDate}
 ├> *Duration*: ${moment(parseInt(duration) * 1000).format("mm:ss")}
 ├> *Views*: ${shortNumberFormat(parseInt(viewCount))}
-├> *Type*: ${tipe}
+├> *Type*: ${type}
+├> *Link*: ${linkdl}
 ╰───────    
 `
 }

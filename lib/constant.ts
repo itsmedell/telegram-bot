@@ -230,3 +230,13 @@ export interface pluginFormat {
     permission: permission
     execute(context: Context, message: ContextMessage, args: string[]): void
 }
+
+export interface ytResultEntry {
+    title: string,
+    author: string,
+    duration: string,
+    viewCount: string,
+    uploadDate: string,
+    type: "audio"|"video",
+    linkdl: string
+}

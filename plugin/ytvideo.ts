@@ -30,33 +30,24 @@ export = {
                 dlurl.push(url)
                 const { lengthSeconds, viewCount, title, uploadDate, likes, author, thumbnails } = resultValue.videoDetails
                 const thumbs = thumbnails[Math.floor(Math.random() * thumbnails.length)]
-                const resultMessage = msg.ytResult(title, author.name, lengthSeconds, viewCount, uploadDate, 'mp4')
+                const resultMessage = msg.ytResult({
+                    title: title,
+                    author: author.name,
+                    duration: lengthSeconds,
+                    viewCount: viewCount,
+                    uploadDate: uploadDate,
+                    type: "video",
+                    linkdl: await shortLinks(url),
+                })
                 
                 await ctx.replyWithPhoto(thumbs, {
+                    reply_to_message_id: message.message_id,
                     caption: resultMessage.trim(),
                     parse_mode: "Markdown"
                 })
 
-                await ctx.reply("Please wait your video will be send", {
-                    reply_to_message_id: message.message_id
-                })
-
-                // Check if duration is too long or not
-                if (filterDuration(parseInt(lengthSeconds))) {
-                    await ctx.reply(`Sorry video duration is too long\nYou can download it at this link: ${await shortLinks(url)}`, {
-                        reply_to_message_id: message.message_id
-                    })
-                } else {
-                    await ctx.replyWithVideo(url, {
-                        reply_to_message_id: message.message_id,
-                        caption: "Here's your videos"
-                    })
-                }
             } catch (error) {
-                ctx.reply("Sorry not we can't send your video", {
-                    reply_to_message_id: message.message_id
-                })
-                ctx.reply(`Here's the download url if you wanna download it manually\n${await shortLinks(dlurl[0])}`, {
+                ctx.reply(randomErrorMessage, {
                     reply_to_message_id: message.message_id
                 })
             }
