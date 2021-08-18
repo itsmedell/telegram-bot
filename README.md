@@ -44,7 +44,7 @@
 
 <details>
 <summary>Downloader</summary>
-<br></br>
+<br>
 
 | Name | Aliases | Arguments |
 | :--: | :-----: | :-------: |
