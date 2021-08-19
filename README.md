@@ -10,7 +10,7 @@
 
 ## 📑 **Requirements**
 - [Git](https://git-scm.com/downloads)
-- [NodeJS](https://nodejs.org/en/download)
+- [Node V14+](https://nodejs.org/en/download)
 
 #
 
