@@ -20,11 +20,9 @@ export = {
         const randomErrorMessage = errorMessageList[Math.floor(Math.random() * errorMessageList.length)]
         const yturl = args.length !== 0 ? args[0] : ''
         const dlurl = []
-        if (!yturl) return ctx.reply("Youtube url is required!", {reply_to_message_id: message.message_id})
+        if (!yturl) return ctx.reply("Youtube url is required!", { reply_to_message_id: message.message_id })
         if (ytdl.validateURL(yturl)) {
-            await ctx.reply("Please wait your request is being processed", {
-                reply_to_message_id: message.message_id
-            })
+            await ctx.reply("Please wait your request is being processed", { reply_to_message_id: message.message_id })
             try {
                 const resultValue = await ytdl.getInfo(yturl)
                 const formats = ytdl.filterFormats(resultValue.formats, 'audioonly')
@@ -41,7 +39,7 @@ export = {
                     type: "audio",
                     linkdl: await shortLinks(url),
                 })
-                
+
                 await ctx.replyWithPhoto(thumbs, {
                     reply_to_message_id: message.message_id,
                     caption: resultMessage.trim(),

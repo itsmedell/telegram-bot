@@ -1,5 +1,8 @@
 import { Context } from "telegraf"
 
+// Type Lines
+export type typeData = "MB" | "KB"
+
 // Variable Lines
 export const configure = [
     {
@@ -231,12 +234,24 @@ export interface pluginFormat {
     execute(context: Context, message: ContextMessage, args: string[]): void
 }
 
-export interface ytResultEntry {
+export interface ytdlEntry {
     title: string,
     author: string,
     duration: string,
     viewCount: string,
     uploadDate: string,
     type: "audio"|"video",
+    linkdl: string
+}
+
+export interface fbdlEntry {
+    title: string,
+    author: string,
+    duration: string,
+    uploadDate: string,
+    viewCount: number,
+    quality: string,
+    type: "Audio"|"Video",
+    size: string,
     linkdl: string
 }

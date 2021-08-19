@@ -4,7 +4,7 @@ import { exec } from "child_process"
 import fs from 'fs'
 import moment from "moment"
 import { Context } from "telegraf"
-import { ContextMessage } from "./constant"
+import { ContextMessage, typeData } from "./constant"
 
 /**
  * Check if token format is valid
@@ -101,9 +101,48 @@ export function loadAllDirFiles(directory:string, filter: string) {
     return data
 }
 
-export async function getBuffer(url: string) {
+export async function getBuffer(url: string): Promise<Buffer> {
     const { data } = await axios.get(url, {
         responseType: 'arraybuffer'
     })
     return data
 }
+
+export function getSize(bytes:number, target: typeData): string {
+    switch(target) {
+        case "MB": {
+            const resultBytes = bytes / 1e+6
+            return `${resultBytes.toFixed(2)} MB`
+        }
+        break
+        case "KB": {
+            const resultBytes = bytes / 1000
+            return `${resultBytes.toFixed()} KB`
+        }
+        break
+        default: {
+            const resultBytes = bytes / 1e+6
+            return `${resultBytes} MB`
+        }
+    }
+}
+
+// export function filterSize(currentSize: string, target: number, typeData?: typeData) {
+//     switch(typeData) {
+//         case "MB": {
+//             let size = parseFloat(currentSize.replace("MB", ""))
+//             return size >= target ? true : false
+//         }
+//         break
+//         case "KB": {
+//             let size = parseFloat(currentSize.replace("KB", ""))
+//             console.log(size)
+//             return size >= target ? true : false
+//         }
+//         break
+//         default: {
+//             let size = parseFloat(currentSize.replace("MB", ""))
+//             return size >= target ? true : false
+//         }
+//     }
+// }

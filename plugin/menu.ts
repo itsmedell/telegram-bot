@@ -67,6 +67,7 @@ export = {
                 break
                 case 'converter':
                     converterHeader += `*Name*: ${name}${aliases}\n*Description*: ${description}\n*Permission*: ${features.permission}\n\n`
+                break
                 case 'media':
                     mediaHeader += `*Name*: ${name}${aliases}\n*Description*: ${description}\n*Permission*: ${features.permission}\n\n`
                 break
