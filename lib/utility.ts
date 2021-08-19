@@ -1,9 +1,7 @@
 import axios from "axios"
-import chalk, { stderr } from "chalk"
-import { exec } from "child_process"
+import chalk from "chalk"
 import fs from 'fs'
 import moment from "moment"
-import { Context } from "telegraf"
 import { ContextMessage, typeData } from "./constant"
 
 /**
