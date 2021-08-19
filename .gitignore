@@ -1,7 +1,7 @@
 node_modules 
+.vscode
 yarn.lock
 yarn-error.log
 data/bot/config.json
 data/user/*.json
 data/group/*.json
-test
