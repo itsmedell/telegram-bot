@@ -46,7 +46,6 @@ export async function MessageHandler(ctx: Context, rawMessage: any) {
 
     // Command Handler
     if (pluginCall) {
-        // Plugin Handler
         pluginCall.execute(ctx, message, args)
     } else {
         switch(commandsName) {
