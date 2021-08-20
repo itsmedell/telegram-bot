@@ -1,8 +1,10 @@
-import axios from "axios"
-import chalk from "chalk"
-import fs from 'fs'
-import moment from "moment"
-import { ContextMessage, typeData } from "./constant"
+import axios from "axios";
+import fetch from "node-fetch";
+import chalk from "chalk";
+import fs from "fs";
+import moment from "moment";
+import FormData from "form-data";
+import { ContextMessage, resUploadFile, typeData } from "./constant"
 
 /**
  * Check if token format is valid
@@ -94,7 +96,7 @@ export async function shortLinks(url: string) {
  * @param filter 
  * @returns List files
  */
-export function loadAllDirFiles(directory:string, filter: string) {
+export function loadAllDirFiles(directory: string, filter: string) {
     const data = fs.readdirSync(directory).filter(file => file.endsWith(filter))
     return data
 }
@@ -106,23 +108,37 @@ export async function getBuffer(url: string): Promise<Buffer> {
     return data
 }
 
-export function getSize(bytes:number, target: typeData): string {
-    switch(target) {
+export function getSize(bytes: number, target: typeData): string {
+    switch (target) {
         case "MB": {
             const resultBytes = bytes / 1e+6
             return `${resultBytes.toFixed(2)} MB`
         }
-        break
+            break
         case "KB": {
             const resultBytes = bytes / 1000
             return `${resultBytes.toFixed()} KB`
         }
-        break
+            break
         default: {
             const resultBytes = bytes / 1e+6
             return `${resultBytes} MB`
         }
     }
+}
+
+export async function uploadFile(pathFile: string) {
+    const fd = new FormData()
+    const path = fs.createReadStream(pathFile)
+    fd.append("file", path)
+    const rawData = await fetch("https://api.anonfile.com/upload", { method: "POST", body: fd })
+    const jsonData = await rawData.json()
+    const resData: resUploadFile = {
+        fileName: jsonData.data.file.metadata.name,
+        fileSize: jsonData.data.file.metadata.size.readable,
+        fileUrl: jsonData.data.file.url.full
+    }
+    return resData
 }
 
 // export function filterSize(currentSize: string, target: number, typeData?: typeData) {

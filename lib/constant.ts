@@ -267,3 +267,9 @@ export interface fbdlResult {
     size: string,
     viewCount: number,
 }
+
+export interface resUploadFile {
+    fileName: string,
+    fileUrl: string,
+    fileSize: string
+}
