@@ -24,6 +24,7 @@ export = {
                 type: "Video",
                 viewCount: viewCount
             })
+            
             ctx.replyWithPhoto(thumbnail, {
                 reply_to_message_id: message.message_id,
                 caption: resultMessage,
