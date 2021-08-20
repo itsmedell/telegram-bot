@@ -26,7 +26,6 @@ export async function getVideoInfo(url: string) {
         const $ = cheerio.load(html)
         const rawData = $('script[type="application/ld+json"]').html()
         const jsonData = JSON.parse(rawData)
-        console.log(jsonData)
         const title = jsonData.name.replace("| Facebook", "").trim()
         const duration = parseDuration(jsonData.duration)
         const uploadDate = jsonData.uploadDate.slice(0, 10)
@@ -51,5 +50,3 @@ export async function getVideoInfo(url: string) {
         return null
     }
 }
-
-// getVideoInfo("https://www.facebook.com/alanwalkermusic/videos/277641643524720")

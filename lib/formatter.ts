@@ -22,7 +22,7 @@ export function shortNumberFormat(value: number): string {
         resultValue = resultValue.substr(0, resultValue.length - 2)
     }
 
-    return `${resultValue}${formatList[formatNumber]}`
+    return `${resultValue} ${formatList[formatNumber]}`
 }
 
 export function chooseQuality(format: videoFormat[], target: string, alternative: string) {

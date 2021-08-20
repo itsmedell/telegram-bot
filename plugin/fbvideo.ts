@@ -12,6 +12,7 @@ export = {
     async execute(ctx: Context, message: ContextMessage, args: string[]) {
         const fburl = args.length !== 0 ? args[0] : ''
         if (fbdl.getValidUrl(fburl)) {
+            await ctx.reply(msg.wait(), { reply_to_message_id: message.message_id })
             try {
                 const { title, duration, author, size, uploadDate, linkdl, quality, viewCount, thumbnail } = await fbdl.getVideoInfo(fburl)
                 const resultMessage = msg.fbResult({
