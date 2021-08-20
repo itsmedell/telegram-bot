@@ -14,7 +14,7 @@
   "scripts": {
     "start": "script/start.sh",
     "build": "tsc",
-    "configure": "ts-node lib/configure.ts"
+    "configure": "ts-node script/configure.ts"
   },
   "dependencies": {
     "@discordjs/collection": "^0.2.1",

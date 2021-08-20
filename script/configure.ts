@@ -6,10 +6,9 @@ import {
     configure,
     locFiles,
     configureFix
-} from './constant'
-import * as constant from './constant'
-import { color, checkFormatToken } from './utility'
-
+} from '../lib/constant'
+import * as constant from '../lib/constant'
+import { color, checkFormatToken } from '../lib/utility'
 
 prompt(configure)
 .then(async (data: constant.configFormat) => {
