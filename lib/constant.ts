@@ -262,6 +262,8 @@ export interface fbdlResult {
     quality: string,
     uploadDate: string,
     duration: string,
+    thumbnail: string,
     linkdl: string,
-    size: string
+    size: string,
+    viewCount: number,
 }

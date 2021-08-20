@@ -21,10 +21,12 @@ export function getValidUrl(url: string) {
 export async function getVideoInfo(url: string) {
     if (!getValidUrl(url)) throw new Error("Invalid facebook url!")
     try {
-        const html = (await axios.get(url)).data
+        const raw = await axios.get(url)
+        const html = raw.data
         const $ = cheerio.load(html)
         const rawData = $('script[type="application/ld+json"]').html()
         const jsonData = JSON.parse(rawData)
+        console.log(jsonData)
         const title = jsonData.name.replace("| Facebook", "").trim()
         const duration = parseDuration(jsonData.duration)
         const uploadDate = jsonData.uploadDate.slice(0, 10)
@@ -32,6 +34,7 @@ export async function getVideoInfo(url: string) {
         const buffdata = await getBuffer(jsonData.contentUrl)
         const size = getSize(buffdata.toJSON().data.length, 'MB')
         const contentUrl = await shortLinks(jsonData.contentUrl)
+        const viewCount = parseInt(html.split(",video_view_count:")[1].split(",")[0])
         const resultData: fbdlResult = {
             title: title,
             author: authorName,
@@ -39,10 +42,14 @@ export async function getVideoInfo(url: string) {
             duration: duration,
             quality: jsonData.videoQuality,
             size: size,
-            linkdl: contentUrl
+            thumbnail: jsonData.thumbnailUrl,
+            linkdl: contentUrl,
+            viewCount: viewCount
         }
         return resultData
     } catch (error) {
         return null
     }
 }
+
+// getVideoInfo("https://www.facebook.com/alanwalkermusic/videos/277641643524720")
