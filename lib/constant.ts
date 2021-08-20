@@ -255,3 +255,13 @@ export interface fbdlEntry {
     size: string,
     linkdl: string
 }
+
+export interface fbdlResult {
+    title: string,
+    author: string,
+    quality: string,
+    uploadDate: string,
+    duration: string,
+    linkdl: string,
+    size: string
+}
