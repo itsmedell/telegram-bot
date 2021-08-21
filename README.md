@@ -61,10 +61,12 @@
 <summary>Downloader</summary>
 <br>
 
-| Name  |   Aliases    | Arguments |      Description       |
-|:-----:|:------------:|:---------:|:----------------------:|
-| ytmp3 | ytaudio, yta |   [url]   | Download youtube audio |
-| ytmp4 |  ytvid, ytv  |   [url]   | Download youtube video |
+| Name  |    Aliases     | Arguments |       Description       |
+|:-----:|:--------------:|:---------:|:-----------------------:|
+| ytmp3 |  ytaudio, yta  |   [url]   | Download youtube audio  |
+| fbmp3 |  fba, fbaudio  |   [url]   | Download facebook audio |
+| ytmp4 |   ytvid, ytv   |   [url]   | Download youtube video  |
+| fbmp4 | fbvid, fbvideo |   [url]   | Download facebook video |
 
 </details>
 

@@ -143,21 +143,22 @@ export async function uploadFile(pathFile: string) {
     return resData
 }
 
-export async function toAudio(pathFile: string, fileName?: string) {
-    if (!pathFile) throw new Error("Where is the path file?")
-    const input = pathFile
-    const output = `./temp/${fileName ? fileName : getRandomID(5)}.mp3`
-    await ffmpeg({
-        source: input
-    }).on("error", (error) => {
-        console.log("Error:", error)
-    }).on("start", () => {
-        console.log("Starting convert from mp4 to mp3")
-    }).on("end", () => {
-        console.log("Success convert file from mp4 to mp3")
-        // send result file path
-        return output
-    }).toFormat("mp3").saveToFile(output)
+export function toAudio(input: string, fileName?: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+        if (!input) throw new Error("Where is the path file?")
+        const output = `./temp/${fileName ? fileName : getRandomID(5)}.mp3`
+        ffmpeg({
+            source: input
+        }).on("error", (error) => {
+            console.log("Error:", error)
+        }).on("start", () => {
+            console.log("Starting convert from mp4 to mp3")
+        }).toFormat("mp3").saveToFile(output)
+        .on("end", () => {
+            console.log("Success convert file from mp4 to mp3")
+            resolve(output)
+        })
+    })
 }
 
 // export function filterSize(currentSize: string, target: number, typeData?: typeData) {
