@@ -11,6 +11,7 @@
 ## 📑 **Requirements**
 - [Git](https://git-scm.com/downloads)
 - [Node V14+](https://nodejs.org/en/download)
+- [Ffmpeg](https://ffmpeg.org/download.html)
 
 #
 
@@ -19,7 +20,7 @@
 > **Linux**
 ```bash
 > sudo apt update && sudo apt upgrade # Optional
-> sudo apt install git nodejs
+> sudo apt install git nodejs ffmpeg
 > sudo npm install -g yarn # Optional
 > git clone https://github.com/lendradev/telegram-bot
 > cd telegram-bot
@@ -30,7 +31,7 @@
 > **Termux**
 ```bash
 > pkg update && pkg upgrade # Optional
-> pkg install git nodejs
+> pkg install git nodejs ffmpeg
 > npm install -g yarn # Optional
 > git clone https://github.com/lendradev/telegram-bot
 > cd telegram-bot

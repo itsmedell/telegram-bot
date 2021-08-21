@@ -4,7 +4,9 @@ import chalk from "chalk";
 import fs from "fs";
 import moment from "moment";
 import FormData from "form-data";
-import { ContextMessage, resUploadFile, typeData } from "./constant"
+import ffmpeg from "fluent-ffmpeg";
+import { ContextMessage, resUploadFile, typeData } from "./constant";
+import { getRandomID } from "./random";
 
 /**
  * Check if token format is valid
@@ -139,6 +141,23 @@ export async function uploadFile(pathFile: string) {
         fileUrl: jsonData.data.file.url.full
     }
     return resData
+}
+
+export async function toAudio(pathFile: string, fileName?: string) {
+    if (!pathFile) throw new Error("Where is the path file?")
+    const input = pathFile
+    const output = `./temp/${fileName ? fileName : getRandomID(5)}.mp3`
+    await ffmpeg({
+        source: input
+    }).on("error", (error) => {
+        console.log("Error:", error)
+    }).on("start", () => {
+        console.log("Starting convert from mp4 to mp3")
+    }).on("end", () => {
+        console.log("Success convert file from mp4 to mp3")
+        // send result file path
+        return output
+    }).toFormat("mp3").saveToFile(output)
 }
 
 // export function filterSize(currentSize: string, target: number, typeData?: typeData) {
