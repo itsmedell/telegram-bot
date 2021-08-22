@@ -7,6 +7,7 @@ import FormData from "form-data";
 import ffmpeg from "fluent-ffmpeg";
 import { ContextMessage, resUploadFile, typeData } from "./constant";
 import { getRandomID } from "./random";
+import { checkValidUrl } from "./validator";
 
 /**
  * Check if token format is valid
@@ -110,25 +111,35 @@ export async function getBuffer(url: string): Promise<Buffer> {
     return data
 }
 
-export function getSize(bytes: number, target: typeData): string {
-    switch (target) {
-        case "MB": {
-            const resultBytes = bytes / 1e+6
-            return `${resultBytes.toFixed(2)} MB`
-        }
-            break
-        case "KB": {
-            const resultBytes = bytes / 1000
-            return `${resultBytes.toFixed()} KB`
-        }
-            break
-        default: {
-            const resultBytes = bytes / 1e+6
-            return `${resultBytes} MB`
-        }
+/**
+ * Get size from bytes
+ * @param bytes 
+ * @param target 
+ * @returns 
+ */
+export function getSize(bytes: number): string {
+    if (bytes >= 1000 && bytes <= 1e+6) {
+        const resultBytes = bytes / 1000
+        return `${resultBytes.toFixed(2)} KB`
+    } else if (bytes >= 1e+6 && bytes <= 1e+9) {
+        const resultBytes = bytes / 1e+6
+        return `${resultBytes.toFixed(2)} MB`
+    } else if (bytes >= 1e+9 && bytes <= 1e+12) {
+        const resultBytes = bytes / 1e+9
+        return `${resultBytes.toFixed(2)} GB`
+    } else if (bytes >= 1e+12) {
+        const resultBytes = bytes / 1e+12
+        return `${resultBytes.toFixed(2)} TB`
+    } else {
+        return `${bytes} B`
     }
 }
 
+/**
+ * Upload file to anonfiles
+ * @param pathFile 
+ * @returns Data result
+ */
 export async function uploadFile(pathFile: string) {
     const fd = new FormData()
     const path = fs.createReadStream(pathFile)
@@ -143,6 +154,12 @@ export async function uploadFile(pathFile: string) {
     return resData
 }
 
+/**
+ * Convert video to audio
+ * @param input 
+ * @param fileName 
+ * @returns output path
+ */
 export function toAudio(input: string, fileName?: string): Promise<string> {
     return new Promise((resolve, reject) => {
         if (!input) throw new Error("Where is the path file?")
@@ -154,11 +171,26 @@ export function toAudio(input: string, fileName?: string): Promise<string> {
         }).on("start", () => {
             console.log("Starting convert from mp4 to mp3")
         }).toFormat("mp3").saveToFile(output)
-        .on("end", () => {
-            console.log("Success convert file from mp4 to mp3")
-            resolve(output)
-        })
+            .on("end", () => {
+                console.log("Success convert file from mp4 to mp3")
+                resolve(output)
+            })
     })
+}
+
+/**
+ * Download file from url
+ * @param url 
+ * @param typeFile 
+ * @param filename 
+ * @returns output file
+ */
+export async function downloadFile(url: string, typeFile: string, filename?: string) {
+    if (!checkValidUrl(url)) throw new Error("Invalid url type!")
+    const output = `./temp/${filename ? filename : getRandomID(5)}.${typeFile}`
+    const { data } = await axios.get(url, { responseType: "arraybuffer" })
+    await fs.writeFileSync(output, data)
+    return output 
 }
 
 // export function filterSize(currentSize: string, target: number, typeData?: typeData) {

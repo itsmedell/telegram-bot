@@ -38,3 +38,9 @@ export function filterDuration(duration: number, target?: string) {
 
     return match
 }
+
+
+export function checkValidUrl(url: string) {
+    const regex = new RegExp("https?://")
+    return regex.test(url)
+}

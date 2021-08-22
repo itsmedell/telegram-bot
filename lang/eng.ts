@@ -48,3 +48,7 @@ export function downloaderError(typeFile: string) {
     const randomErrorMessage = errorMessageList[Math.floor(Math.random() * errorMessageList.length)]
     return randomErrorMessage
 }
+
+export function missingUrl(name?: string) {
+    return `${name ? name : ''} url is required!`
+}

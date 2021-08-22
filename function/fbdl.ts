@@ -31,7 +31,7 @@ export async function getVideoInfo(url: string) {
         const uploadDate = jsonData.uploadDate.slice(0, 10)
         const authorName = jsonData.author.name
         const buffdata = await getBuffer(jsonData.contentUrl)
-        const size = getSize(buffdata.toJSON().data.length, 'MB')
+        const size = getSize(buffdata.toJSON().data.length)
         const contentUrl = await shortLinks(jsonData.contentUrl)
         const viewCount = parseInt(html.split(",video_view_count:")[1].split(",")[0])
         const resultData: fbdlResult = {
