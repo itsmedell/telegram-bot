@@ -54,6 +54,7 @@
 
 
 </details>
+
 <h1></h1>
 
 <!-- Downloader Section -->
@@ -81,5 +82,16 @@
 |:----:|:-----------:|:---------:|:---------------------------:|
 | ping |    pong     |   none    |      Send pong message      |
 | menu | help, guide |   none    | Send all guide bot features |
+
+</details>
+
+<!-- Games Section -->
+<details>
+<summary>Game</summary>
+<br>
+
+| Name |     Aliases      | Arguments  |                  Description                  |
+|:----:|:----------------:|:----------:|:---------------------------------------------:|
+|  is  | 8ball, eightball | [question] | Answer random question with random answer too |
 
 </details>
