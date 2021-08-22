@@ -22,7 +22,7 @@ const config: configFormat = fs.existsSync(locFiles.config) && JSON.parse(fs.rea
  * Message / Command handler
  * @param ctx 
  */
-export async function MessageHandler(ctx: Context, rawMessage: any) {
+export async function MessageHandler(ctx: Context, rawMessage?: any) {
     const message: ContextMessage = rawMessage
     if (!ctx.message) return
     if (!hasNewMessage(rawMessage)) return
@@ -68,6 +68,23 @@ export async function MessageHandler(ctx: Context, rawMessage: any) {
             break
 
             // Bot Category
+            case "menu": {
+                ctx.reply("Please choose category menu below", {
+                    reply_markup: {
+                        inline_keyboard: [[
+                            { text: "ᴅᴏᴡɴʟᴏᴀᴅᴇʀ", callback_data: "downloader" },
+                            { text: "ᴄᴏɴᴠᴇʀᴛᴇʀ", callback_data: "converter" },
+                            { text: "ᴍᴇᴅɪᴀ", callback_data: "media" },
+                            { text: "ɢᴀᴍᴇ", callback_data: "game" },
+                            { text: "ʙᴏᴛ", callback_data: "bot" },
+                            { text: "ᴏᴛʜᴇʀ", callback_data: "other" }
+                        ]]
+                    },
+                    reply_to_message_id: message.message_id,
+                    parse_mode: "Markdown"
+                })
+            }
+            break
             // Game Category
             case "is":
             case "eightball":

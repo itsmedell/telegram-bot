@@ -26,5 +26,12 @@
         "description": "Answer your random question, with random answer too",
         "category": "game", 
         "permission": "free"
+    },
+    {
+        "name": "menu",
+        "aliases": ["guide", "help"],
+        "description": "Send guide / list features",
+        "category": "bot", 
+        "permission": "free"
     }
 ]

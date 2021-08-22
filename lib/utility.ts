@@ -5,7 +5,7 @@ import fs from "fs";
 import moment from "moment";
 import FormData from "form-data";
 import ffmpeg from "fluent-ffmpeg";
-import { ContextMessage, resUploadFile, typeData } from "./constant";
+import { ContextMessage, resUploadFile } from "./constant";
 import { getRandomID } from "./random";
 import { checkValidUrl } from "./validator";
 

@@ -1,8 +1,5 @@
 import { Context } from "telegraf"
 
-// Type Lines
-export type typeData = "MB" | "KB"
-
 // Variable Lines
 export const configure = [
     {
@@ -215,7 +212,7 @@ export interface ContextMessage {
 }
 
 type permission = "free" | "owner" | "premium"
-type category = 'downloader' | 'bot' | 'game' | 'regular' | 'media' | 'converter'
+type category = "downloader" | "bot" | "game" | "regular" | "media" | "converter"
 
 export interface menuList {
     name: string,

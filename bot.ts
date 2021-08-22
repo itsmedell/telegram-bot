@@ -67,6 +67,7 @@ export async function starts() {
     // Handler
     handler.EventsHandler(bot)
     bot.on('message', (context) => {
+        handler.inputMessage(context.message)
         handler.MessageHandler(context, context.message)
     })
 }
