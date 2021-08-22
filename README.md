@@ -85,6 +85,8 @@
 
 </details>
 
+<h1></h1>
+
 <!-- Games Section -->
 <details>
 <summary>Game</summary>
