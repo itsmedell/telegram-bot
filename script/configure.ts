@@ -18,7 +18,7 @@ prompt(configure)
             await prompt({
                 type: "input",
                 name: "prefix",
-                message: "Masukan prefix"
+                message: "Enter Prefix"
             }).then((res: any) => {
                 data.prefix = res.prefix.split(",")
                 data.prefix.push("/")
@@ -28,7 +28,7 @@ prompt(configure)
             await prompt({
                 type: "input",
                 name: "prefix",
-                message: "Masukan prefix"
+                message: "Enter Prefix"
             }).then((res: any) => {
                 data.prefix = [res.prefix]
                 data.prefix.push("/")
