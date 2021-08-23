@@ -34,11 +34,6 @@ export const configureFix = {
 }
 
 // Enum Lines
-export enum typeChat {
-    private = 'private',
-    group = 'group'
-}
-
 export enum locFiles {
     config = './data/bot/config.json',
     data = './data/',
@@ -46,6 +41,9 @@ export enum locFiles {
     lib = './lib/',
     func = './function/'
 }
+
+// Type lines
+type typeChat = "channel" | "supergroup" | "private" | "group" 
 
 // Interface Lines
 export interface configFormat {
@@ -150,7 +148,7 @@ interface replyMessage {
         first_name: string,
         username: string,
         language_code: string,
-        type: string
+        type: typeChat
     },
     date: number,
     text?: string,
@@ -195,7 +193,7 @@ export interface ContextMessage {
         first_name: string,
         username: string,
         language_code: string,
-        type: string
+        type: typeChat
     },
     date: number,
     text?: string,
