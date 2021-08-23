@@ -2,9 +2,9 @@
 
 <p align="center">
     <a href="https://github.com/lendradev/#readme"><img src="https://img.shields.io/github/license/lendradev/telegram-bot?color=blue&label=License&logo=github&style=flat-square"></a>
-    &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;
     <a href="https://github.com/lendradev/#readme"><img src="https://img.shields.io/github/package-json/v/lendradev/telegram-bot?color=blue&label=Version&logo=github&style=flat-square"></a>
-    &nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;
     <a href="https://github.com/lendradev/#readme"><img src="https://img.shields.io/github/repo-size/lendradev/telegram-bot?label=Size&logo=github&style=flat-square"></a>
 </p>
 
