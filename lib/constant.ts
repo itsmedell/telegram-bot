@@ -5,17 +5,17 @@ export const configure = [
     {
         type: "input",
         name: "username",
-        message: "Masukan username"
+        message: "Username"
     },
     {
         type: "password",
         name: "token",
-        message: "Masukan token"
+        message: "Token"
     },
     {
         type: "select",
         name: "prefix",
-        message: "Masukan tipe prefix",
+        message: "Type Prefix",
         choices: [
             "single",
             "multi"
@@ -26,7 +26,7 @@ export const configure = [
 export const configureFix = {
     type: "select",
     name: "confirm",
-    message: "Pilih yes / no",
+    message: "Choose yes / no",
     choices: [
         "yes",
         "no"
