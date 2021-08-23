@@ -52,3 +52,17 @@ export function downloaderError(typeFile: string) {
 export function missingUrl(name?: string) {
     return `${name ? name : ''} url is required!`
 }
+
+export function wrongCommand(name: string) {
+    const wrongCommandList = [
+        "Sorry @user that command doesn't exist", "@user that feature doesn't exist",
+        "Command not found", "Sorry that features doesn't exist", "@user that feature didn't exist"
+    ]
+    let randomWrongCommand = wrongCommandList[Math.floor(Math.random() * wrongCommandList.length)]
+    if (randomWrongCommand.includes("@user")) {
+        randomWrongCommand = randomWrongCommand.replace("@user", name)
+    } else {
+        randomWrongCommand = randomWrongCommand
+    }
+    return randomWrongCommand
+}

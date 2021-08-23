@@ -6,6 +6,7 @@ import { color, hasNewMessage, isCmd } from "../lib/utility";
 import fs from 'fs'
 import Collection from "@discordjs/collection";
 import moment from "moment";
+import * as msg from '../lang/export'
 
 // Plugin Loader
 const plugins: any = new Collection();
@@ -104,7 +105,7 @@ export async function MessageHandler(ctx: Context, rawMessage?: any) {
             // Response if command / features are typo or doesn't exist
             default:
                 if (isCommand) {
-                    ctx.reply("Command not found!", {
+                    ctx.reply(msg.wrongCommand(message.from.username), {
                         reply_to_message_id: message.message_id
                     })
                 }
