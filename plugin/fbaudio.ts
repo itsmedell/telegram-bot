@@ -19,7 +19,7 @@ export = {
             await ctx.reply(msg.wait(), { reply_to_message_id: message.message_id })
             try {
                 const randomName = getRandomID(5)
-                const { title, duration, author, uploadDate, linkdl, quality, thumbnail } = await fbdl.getVideoInfo(fburl)
+                const { title, duration, author, uploadDate, linkdl, thumbnail } = await fbdl.getVideoInfo(fburl)
                 const fileMP4 = await downloadFile(linkdl, "mp4", randomName)
                 const fileMP3 = await toAudio(fileMP4, randomName)
                 const { fileUrl, fileSize } = await uploadFile(fileMP3)
@@ -30,7 +30,7 @@ export = {
                     duration: duration,
                     author: author,
                     size: fileSize,
-                    quality: quality,
+                    quality: "128 K",
                     uploadDate: uploadDate,
                     linkdl: dlurl,
                     type: "Audio"
