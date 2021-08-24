@@ -14,7 +14,7 @@ export = {
         if (fbdl.getValidUrl(fburl)) {
             await ctx.reply(msg.wait(), { reply_to_message_id: message.message_id })
             try {
-                const { title, duration, author, size, uploadDate, linkdl, quality, viewCount, thumbnail } = await fbdl.getVideoInfo(fburl)
+                const { title, duration, author, size, uploadDate, linkdl, quality, thumbnail } = await fbdl.getVideoInfo(fburl)
                 const resultMessage = msg.fbResult({
                     title: title,
                     duration: duration,
@@ -24,7 +24,6 @@ export = {
                     linkdl: linkdl,
                     quality: quality,
                     type: "Video",
-                    viewCount: viewCount
                 })
                 ctx.replyWithPhoto(thumbnail, {
                     reply_to_message_id: message.message_id,

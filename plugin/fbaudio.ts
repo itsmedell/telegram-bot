@@ -2,7 +2,9 @@ import { Context } from 'telegraf'
 import { ContextMessage } from '../lib/constant'
 import * as msg from '../lang/export'
 import * as fbdl from '../function/fbdl'
-import { downloadFile, toAudio, uploadFile } from '../lib/utility'
+import { downloadFile, shortLinks, toAudio, uploadFile } from '../lib/utility'
+import { getRandomID } from '../lib/random'
+import fs from 'fs'
 
 export = {
     name: "fbmp3",
@@ -14,20 +16,23 @@ export = {
         const fburl = args.length !== 0 ? args[0] : ''
         if (!fburl) return ctx.reply(msg.missingUrl("facebook"), { reply_to_message_id: message.message_id })
         if (fbdl.getValidUrl(fburl)) {
+            await ctx.reply(msg.wait(), { reply_to_message_id: message.message_id })
             try {
-                const { title, duration, author, size, uploadDate, linkdl, quality, viewCount, thumbnail } = await fbdl.getVideoInfo(fburl)
-                const fileMP4 = await downloadFile(linkdl, "mp4")
-                const fileMP3 = await toAudio(fileMP4)
-                const { fileUrl } = await uploadFile(fileMP3)
+                const randomName = getRandomID(5)
+                const { title, duration, author, uploadDate, linkdl, quality, thumbnail } = await fbdl.getVideoInfo(fburl)
+                const fileMP4 = await downloadFile(linkdl, "mp4", randomName)
+                const fileMP3 = await toAudio(fileMP4, randomName)
+                const { fileUrl, fileSize } = await uploadFile(fileMP3)
+                const dlurl = await shortLinks(fileUrl)
+                fs.unlinkSync(fileMP3)
                 const resultMessage = msg.fbResult({
                     title: title,
                     duration: duration,
                     author: author,
-                    size: size,
+                    size: fileSize,
                     quality: quality,
-                    viewCount: viewCount,
                     uploadDate: uploadDate,
-                    linkdl: fileUrl,
+                    linkdl: dlurl,
                     type: "Audio"
                 })
                 ctx.replyWithPhoto(thumbnail, {

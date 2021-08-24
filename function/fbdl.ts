@@ -22,7 +22,7 @@ export async function getVideoInfo(url: string) {
     if (!getValidUrl(url)) throw new Error("Invalid facebook url!")
     try {
         const raw = await axios.get(url)
-        const html = raw.data
+        const html: string = raw.data
         const $ = cheerio.load(html)
         const rawData = $('script[type="application/ld+json"]').html()
         const jsonData = JSON.parse(rawData)
@@ -33,7 +33,6 @@ export async function getVideoInfo(url: string) {
         const buffdata = await getBuffer(jsonData.contentUrl)
         const size = getSize(buffdata.toJSON().data.length)
         const contentUrl = await shortLinks(jsonData.contentUrl)
-        const viewCount = parseInt(html.split(",video_view_count:")[1].split(",")[0])
         const resultData: fbdlResult = {
             title: title,
             author: authorName,
@@ -43,7 +42,6 @@ export async function getVideoInfo(url: string) {
             size: size,
             thumbnail: jsonData.thumbnailUrl,
             linkdl: contentUrl,
-            viewCount: viewCount
         }
         return resultData
     } catch (error) {

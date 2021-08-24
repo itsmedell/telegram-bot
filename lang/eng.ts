@@ -6,8 +6,8 @@ export function ytResult(entry: ytdlEntry) {
     const { title, author, uploadDate, duration, viewCount, type, linkdl } = entry
     return `
 ╭──────
-├> ${title.length > 17 ? `*Title*:\n${title}` : title}
-├> ${author.length > 17 ? `*Author*:\n${author}` : author}
+├> ${title.length > 17 ? `*Title*:\n${title}` : `*Title*: ${title}`}
+├> ${author.length > 17 ? `*Author*:\n${author}` : `*Author*: ${author}`}
 ├> *Published*: ${uploadDate}
 ├> *Duration*: ${moment(parseInt(duration) * 1000).format("mm:ss")}
 ├> *Views*: ${shortNumberFormat(parseInt(viewCount))}
@@ -18,19 +18,19 @@ export function ytResult(entry: ytdlEntry) {
 }
 
 export function fbResult(entry: fbdlEntry) {
-    const { title, author, uploadDate, duration, viewCount, type, size, quality, linkdl } = entry
+    const { title, author, uploadDate, duration, type, size, quality, linkdl } = entry
     return `
 ╭──────
-├> ${title.length > 17 ? `*Title*:\n${title}` : title}
-├> ${author.length > 17 ? `*Author*:\n${author}` : author}
+├> ${title.length > 17 ? `*Title*:\n${title}` : `*Title*: ${title}`}
+├> ${author.length > 17 ? `*Author*:\n${author}` : `*Author*: ${author}`}
 ├> *Published*: ${uploadDate}
 ├> *Duration*: ${duration}
 ├> *Quality*: ${quality}
-├> *Views*: ${shortNumberFormat(viewCount)}
 ├> *Type*: ${type}
 ├> *Size*: ${size}
 ├> *Link*: ${linkdl}
-╰───────`
+╰───────
+`
 }
 
 export function wait() {

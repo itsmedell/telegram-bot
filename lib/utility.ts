@@ -141,6 +141,7 @@ export function getSize(bytes: number): string {
  * @returns Data result
  */
 export async function uploadFile(pathFile: string) {
+    console.log("Uploading files")
     const fd = new FormData()
     const path = fs.createReadStream(pathFile)
     fd.append("file", path)
@@ -151,6 +152,7 @@ export async function uploadFile(pathFile: string) {
         fileSize: jsonData.data.file.metadata.size.readable,
         fileUrl: jsonData.data.file.url.full
     }
+    console.log("Success upload file")
     return resData
 }
 
@@ -174,6 +176,8 @@ export function toAudio(input: string, fileName?: string): Promise<string> {
             .on("end", () => {
                 console.log("Success convert file from mp4 to mp3")
                 resolve(output)
+                console.log("Deleting mp4 files")
+                fs.unlinkSync(input)
             })
     })
 }
@@ -187,9 +191,11 @@ export function toAudio(input: string, fileName?: string): Promise<string> {
  */
 export async function downloadFile(url: string, typeFile: string, filename?: string) {
     if (!checkValidUrl(url)) throw new Error("Invalid url type!")
+    console.log("Downloading file")
     const output = `./temp/${filename ? filename : getRandomID(5)}.${typeFile}`
     const { data } = await axios.get(url, { responseType: "arraybuffer" })
     await fs.writeFileSync(output, data)
+    console.log("Success download file")
     return output 
 }
 

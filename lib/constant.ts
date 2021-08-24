@@ -244,7 +244,6 @@ export interface fbdlEntry {
     author: string,
     duration: string,
     uploadDate: string,
-    viewCount: number,
     quality: string,
     type: "Audio"|"Video",
     size: string,
@@ -260,7 +259,6 @@ export interface fbdlResult {
     thumbnail: string,
     linkdl: string,
     size: string,
-    viewCount: number,
 }
 
 export interface resUploadFile {
