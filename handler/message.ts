@@ -69,6 +69,7 @@ export async function MessageHandler(ctx: Context, rawMessage?: any) {
             break
 
             // Bot Category
+            case "start":
             case "menu": {
                 ctx.reply("Please choose category menu below", {
                     reply_markup: {
